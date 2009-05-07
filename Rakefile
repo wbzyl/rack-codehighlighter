@@ -14,7 +14,6 @@ spec = Gem::Specification.new do |s|
   s.description  = s.summary
   s.files        = %w[Rakefile README.markdown TODO] + Dir["lib/**/*"] + Dir["examples/**/*"]
   
-  s.has_rdoc = true
   s.extra_rdoc_files = %w(LICENSE)
   
 #  s.add_dependency 'coderay', '>=0.8.312'
