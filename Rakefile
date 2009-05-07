@@ -10,7 +10,7 @@ spec = Gem::Specification.new do |s|
   s.author       = "Włodek Bzyl"
   s.email        = "matwb" + "@" + "univ.gda.pl"
   s.homepage     = "http://github.com/wbzyl/codehighlighter-middleware"
-  s.summary      = "Rack Middleware for Code Highlighting"
+  s.summary      = "Rack Middleware for Code Highlighting."
   s.description  = s.summary
   s.files        = %w[Rakefile README.markdown TODO] + Dir["lib/**/*"] + Dir["examples/**/*"]
   
