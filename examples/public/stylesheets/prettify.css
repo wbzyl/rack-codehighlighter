@@ -1,0 +1,44 @@
+/* Pretty printing styles. Used with prettify.js. */
+
+/* the default theme / style / pallette
+.prettyprint .str { color: #080; }
+.prettyprint .kwd { color: #008; }
+.prettyprint .com { color: #800; }
+.prettyprint .typ { color: #606; }
+.prettyprint .lit { color: #066; }
+.prettyprint .pun { color: #660; }
+.prettyprint .pln { color: #000; }
+.prettyprint .tag { color: #008; }
+.prettyprint .atn { color: #606; }
+.prettyprint .atv { color: #080; }
+.prettyprint .dec { color: #606; }
+pre.prettyprint { padding: 2px; border: 1px solid #888; }
+*/
+
+/* more-prettier pallette by Ryan Tomayko
+     http://tomayko.com/writings/javascript-prettification
+*/
+.prettyprint .str { color:#181; font-style:italic }
+.prettyprint .kwd { color:#369; }
+.prettyprint .com { color:#666; }
+.prettyprint .typ { color:#C40; }
+.prettyprint .lit { color:#900; }
+.prettyprint .pun { color:#000; font-weight:bold  }
+.prettyprint .pln { color:#333; }
+.prettyprint .tag { color:#369; font-weight:bold  }
+.prettyprint .atn { color:#939; font-weight:bold  }
+.prettyprint .atv { color:#181; }
+.prettyprint .dec { color:#606; }
+
+@media print {
+  .prettyprint .str { color: #060; }
+  .prettyprint .kwd { color: #006; font-weight: bold; }
+  .prettyprint .com { color: #600; font-style: italic; }
+  .prettyprint .typ { color: #404; font-weight: bold; }
+  .prettyprint .lit { color: #044; }
+  .prettyprint .pun { color: #440; }
+  .prettyprint .pln { color: #000; }
+  .prettyprint .tag { color: #006; font-weight: bold; }
+  .prettyprint .atn { color: #404; }
+  .prettyprint .atv { color: #060; }
+}

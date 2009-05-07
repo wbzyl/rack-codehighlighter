@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="/stylesheets/application.css" 
+          type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/syntax.css" 
+          type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/coderay.css" 
+          type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/uv.css" 
+          type="text/css" media="screen" charset="utf-8">
+
+    <link rel="stylesheet" href="/stylesheets/prettify.css" 
+          type="text/css" media="screen" charset="utf-8"/>
+
+    <script src="/javascripts/prettify.js"
+          type="text/javascript" charset="utf-8"></script>
+
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+    // on page load complete, fire off a prettyPrint
+    google.setOnLoadCallback(function() {
+        prettyPrint();     
+    });
+    </script>
+     
+    <title><%= "Code Highlighting Middleware" %></title>
+  </head>
+  
+  <body>
+
+    <%= yield %>
+    
+  </body>
+</html>

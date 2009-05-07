@@ -1,0 +1,79 @@
+/* ruby */
+
+pre .normal {}
+pre .comment { color: #444; font-style: italic; }
+pre .keyword { color: #A00; font-weight: bold; }
+pre .method { color: #077; }
+pre .class { color: #074; }
+pre .module { color: #050; }
+pre .punct { color: #447; font-weight: bold; }
+pre .symbol { color: #099; }
+pre .string { color: #944; background: #FFE; }
+pre .char { color: #F07; }
+pre .ident { color: #004; }
+pre .constant { color: #07F; }
+pre .regex { color: #B66; background: #FEF; }
+pre .number { color: #F99; }
+pre .attribute { color: #7BB; }
+pre .global { color: #7FB; }
+pre .expr { color: #227; }
+pre .escape { color: #277; }
+
+/* ansic */
+
+pre .predefined_types { color: #DD0000; }
+
+pre .hex { color: #F99; }
+pre .oct { color: #F99; }
+pre .integer { color: #07F; }
+pre .float { color: #F99; }
+pre .preprocessor { color: #FF00FF; }
+
+pre .other { color: black; }
+
+/* xml */
+
+pre .namespace { color: #B66; font-weight: bold; }
+pre .tag { color: #00A; }
+pre .entity { color: #444; font-weight: bold; }
+
+/* css21 */
+
+pre .cdo { color: #666; }
+pre .cdc { color: #666; }
+pre .invalid { color: #FF0000; }
+pre .property { color:  #ff4500; }
+pre .ident { color: #000080; }
+pre .id { color: #0000FF; }
+pre .important { color: #EE0000; background: #ffd700;}
+
+pre .import { color: #A0A; }
+pre .page { color: #A0A; }
+pre .media { color: #A0A; }
+pre .charset { color: #A0A; }
+
+pre .uri { color: #7BB; }
+pre .function { color: #077; }
+
+pre .hash { color: #07F; }
+pre .ems { color: #07F; }
+pre .exs { color: #07F; }
+pre .length { color: #07F; }
+pre .angle { color: #07F; }
+pre .time { color: #07F; }
+pre .freq { color: #07F; }
+pre .dimension { color: #07F; }
+pre .percentage { color: #07F; }
+pre .number { color: #07F; }
+
+/* sqlite */
+
+pre .datatype { color: #D00; }
+
+/* javascript */
+
+pre .predefined_types { color: #D00; }
+pre .unicode { color: #F99; }
+
+
+pre .other { color: black; }

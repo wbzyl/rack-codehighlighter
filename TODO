@@ -1,0 +1,22 @@
+
+[1.05.2009, done] 
+  Add support for code-prettify:
+
+    * [source code](http://code.google.com/p/google-code-prettify/)
+      [example](http://google-code-prettify.googlecode.com/svn/trunk/README.html)
+
+   
+    * see http://tomayko.com/writings/javascript-prettification
+      (support for jQuery, new pallette)
+
+    * example:
+      <pre class="prettyprint lang-html">
+      The lang-* class specifies the language file extensions.
+      File extensions supported by default include
+      "bsh", "c", "cc", "cpp", "cs", "csh", "cyc", "cv", "htm", "html",
+      "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh",
+      "xhtml", "xml", "xsl".
+      </pre>
+
+[1.05.2009] 
+  Add support for unobtrustive Code Highlighter By Dan Webb 11/2005
