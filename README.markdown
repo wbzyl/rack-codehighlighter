@@ -9,7 +9,7 @@ Markup your code with:
     ...
     </code></pre>
 
-or in Markdown
+or in Markdown/RDiscount
 
     :::ruby
     ...
@@ -24,7 +24,7 @@ Example (incomplete html, needs a layout file):
     require 'sinatra/rdiscount'
     require 'codehighlighter-middleware'
     
-    require 'coderay'  # here we use Coderay
+    require 'coderay'  # here we use the Coderay highlighter
     
     use Rack::Codehighlighter, :coderay
     
@@ -45,6 +45,13 @@ Example (incomplete html, needs a layout file):
             fib(n-2) + fib(n-1)
           end
         end
+
+Instal the gem with:
+
+    rake install
+
+
+## An example
 
 The Codehighlighter follows the same syntax as regular Markdown
 code blocks, with one exception. It needs to know what
