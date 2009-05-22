@@ -1,31 +1,39 @@
-# -*- coding: utf-8 -*-
-
 require "rubygems"
 require "rake/gempackagetask"
 require "rake/clean"
+#require "spec/rake/spectask"
 
-spec = Gem::Specification.new do |s|
-  s.name         = "codehighlighter-middleware"
-  s.version      = "0.0.2"
-  s.author       = "Włodek Bzyl"
-  s.email        = "matwb" + "@" + "univ.gda.pl"
-  s.homepage     = "http://github.com/wbzyl/codehighlighter-middleware"
-  s.summary      = "Rack Middleware for Code Highlighting."
-  s.description  = s.summary
-  s.files        = %w[Rakefile README.markdown TODO] + Dir["lib/**/*"] + Dir["examples/**/*"]
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '/lib')
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name         = "codehighlighter-middleware"
+    s.summary      = "Rack Middleware for Code Highlighting."
+    s.email        = "matwb@univ.gda.pl"  
+    s.homepage     = "http://github.com/wbzyl/codehighlighter-middleware"
+    s.authors      = ["Wlodek Bzyl"]
+    s.description  = s.summary
   
-  s.extra_rdoc_files = %w(LICENSE)
-  
-#  s.add_dependency 'coderay', '>=0.8.312'
-  s.add_dependency 'hpricot', '>=0.8.1'   
+    #  s.add_dependency 'coderay', '>=0.8.312'
+    s.add_dependency 'hpricot', '>=0.8.1'   
+  end
+rescue LoadError
+  puts "Jeweler not available."
+  puts "Install it with:"
+  puts "  sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
-Rake::GemPackageTask.new(spec) do |package|
-  package.gem_spec = spec
-end
+#Rake::TestTask.new(:test) do |t|
+#  t.libs << 'lib' << 'test'
+#  t.pattern = 'test/**/*_test.rb'
+#  t.verbose = false
+#end
 
 desc 'Install the package as a gem.'
-task :install => [:clean, :package] do
-  gem = Dir['pkg/*.gem'].first
+task :install => [:clean, :build] do
+  gem = Dir['pkg/*.gem'].last
   sh "sudo gem install --no-rdoc --no-ri --local #{gem}"
 end
+
+task :default => :test
