@@ -3,13 +3,17 @@
 The *Codehighlighter* gem provides a thin interface over a bunch 
 of exisitng code highlighters to make their usage as generic possible.
 
+To install it, run:
+
+    sudo gem install wbzyl-codehighlighter-middleware -s http://gems.github.com
+
 Markup your code with:
 
     <pre><code>:::ruby
     ...
     </code></pre>
 
-or in Markdown/RDiscount
+or in Markdown/RDiscount templates:
 
     :::ruby
     ...
@@ -21,10 +25,13 @@ Example (incomplete html, needs a layout file):
     require 'rubygems'
     require 'sinatra'
     require 'rdiscount'
+    require 'coderay'    # here we use the Coderay highlighter
+
+    gem 'wbzyl-sinatra-rdiscount'
     require 'sinatra/rdiscount'
-    require 'codehighlighter-middleware'
-    
-    require 'coderay'  # here we use the Coderay highlighter
+
+    gem 'wbzyl-sinatra-rdiscount'
+    require 'wbzyl-codehighlighter-middleware'
     
     use Rack::Codehighlighter, :coderay
     
