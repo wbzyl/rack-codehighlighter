@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{codehighlighter-middleware}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "TODO",
      "VERSION.yml",
+     "codehighlighter-middleware.gemspec",
      "examples/app.rb",
      "examples/config.ru",
      "examples/public/javascripts/lang-css.js",
