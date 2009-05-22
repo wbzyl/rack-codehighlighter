@@ -13,30 +13,21 @@ Markup your code with:
     ...
     </code></pre>
 
-or in Markdown/RDiscount templates:
-
-    :::ruby
-    ...
-
-Example (incomplete html, needs a layout file):
+Example (incomplete html, needs a layout file with link to css):
 
     # file simple.rb
 
     require 'rubygems'
     require 'sinatra'
-    require 'rdiscount'
-    require 'coderay'    # here we use the Coderay highlighter
-
-    gem 'wbzyl-sinatra-rdiscount'
-    require 'sinatra/rdiscount'
-
+    require 'coderay'    # use the Coderay highlighter
+    
     gem 'wbzyl-sinatra-rdiscount'
     require 'wbzyl-codehighlighter-middleware'
     
     use Rack::Codehighlighter, :coderay
     
     get "/" do
-      rdiscount :hello
+      erb :hello
     end
     
     __END__
@@ -44,19 +35,15 @@ Example (incomplete html, needs a layout file):
     @@ hello
     ### Fibonacci numbers in Ruby
     
-        :::ruby
-        def fib(n)
-          if n < 2
-            1
-          else
-            fib(n-2) + fib(n-1)
-          end
-        end
-
-Instal the gem with:
-
-    rake install
-
+    <pre><code>:::ruby
+    def fib(n)
+      if n < 2
+        1
+      else
+        fib(n-2) + fib(n-1)
+      end
+    end
+    </code></pre>
 
 ## An example
 
@@ -90,9 +77,10 @@ and contemplate the sheer beauty of the rendered code.
 
 ## Supported Highlighters
 
-These currently include: *Syntax*, *Coderay* (very fast), *Ultraviolet*.
+These currently include: *Syntax* (fast), *Coderay* (very fast), 
+*Ultraviolet* (slow).
 
-### Syntax, fast
+### Syntax
 
 Supported languages: 
 
@@ -107,7 +95,7 @@ I added support for these languages:
 * sqlite
 
 
-### [Coderay](http://coderay.rubychan.de/), very fast
+### [Coderay](http://coderay.rubychan.de/)
 
 Supported languages:
 
@@ -134,7 +122,7 @@ Supported languages:
 * xhtml, xml, xsl
 
 
-### Ultraviolet, slow
+### Ultraviolet
 
 Needs oniguruma regexp library.
 Installation instruction for Oniguruma:
