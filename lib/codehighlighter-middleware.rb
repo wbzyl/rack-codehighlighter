@@ -1,17 +1,37 @@
 # -*- coding: utf-8 -*-
 
 require 'rack'
+require 'rack/utils'
 require 'hpricot'
 
 module Rack
   class Codehighlighter
+    include Rack::Utils
+    
+    #FORMAT = %{%s [%s] %s [%s] "%s%s%s%" %d %s %0.4f\n}
+    FORMAT = %{%s - [%s] %s [%s] "%s %s%s %s" %d %s %0.4f\n}
+    
     def initialize(app, highlighter = :syntax, opts = {})
       @app = app
       @highlighter = highlighter
       @opts = opts
     end
     def call(env)
+      began_at = Time.now
       status, headers, response = @app.call(env)
+      headers = HeaderHash.new(headers)
+
+      log(env, status, headers, began_at)
+      
+#       if !STATUS_WITH_NO_ENTITY_BODY.include?(status) &&
+#          !headers['Content-Length'] &&
+#          !headers['Transfer-Encoding'] &&
+#          (body.respond_to?(:to_ary) || body.respond_to?(:to_str))
+
+#         length = body.to_ary.inject(0) { |len, part| len + bytesize(part) }
+#         headers['Content-Length'] = length.to_s
+#       end
+      
       if headers['Content-Type'] != nil && headers['Content-Type'].include?("text/html")
         content = ""
         response.each { |part| content += part }
@@ -32,6 +52,26 @@ module Rack
     end
     
     private
+
+    def log(env, status, headers, began_at)
+      # lilith.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n
+      now = Time.now
+      length = 1024 # ???
+      logger = env['rack.errors']
+      logger.write FORMAT % [
+        env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-",
+        @highlighter,
+        headers["content-type"] || "unknown",
+        now.strftime("%d/%b/%Y %H:%M:%S"),
+        env["REQUEST_METHOD"],
+        env["PATH_INFO"],
+        env["QUERY_STRING"].empty? ? "" : "?"+env["QUERY_STRING"],
+        env["HTTP_VERSION"],
+        status.to_s[0..3],
+        length,
+        now - began_at
+      ]
+    end
     
     def syntax(string)
       translate = {

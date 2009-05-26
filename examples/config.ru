@@ -9,6 +9,6 @@ use Rack::Codehighlighter, :prettify
 #use Rack::Codehighlighter, :syntax
 #use Rack::Codehighlighter, :ultraviolet, :theme => 'espresso_libre'
 
-use Rack::Static, :urls => ["/stylesheets"], :root => "public"
+#use Rack::Static, :urls => ["/stylesheets"], :root => "public"
 
 run Sinatra::Application
