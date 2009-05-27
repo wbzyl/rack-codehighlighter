@@ -1,38 +1,30 @@
-# -*- coding: utf-8 -*-
-
-require 'rack'
 require 'rack/utils'
+
+gem 'hpricot', '>=0.8.1'
 require 'hpricot'
 
 module Rack
   class Codehighlighter
     include Rack::Utils
     
-    #FORMAT = %{%s [%s] %s [%s] "%s%s%s%" %d %s %0.4f\n}
-    FORMAT = %{%s - [%s] %s [%s] "%s %s%s %s" %d %s %0.4f\n}
+    FORMAT = %{%s - [%s] [%s] "%s %s%s %s" (%s) %d %d %0.4f\n}
     
-    def initialize(app, highlighter = :syntax, opts = {})
+    def initialize(app, highlighter = :coderay, opts = {})
       @app = app
       @highlighter = highlighter
       @opts = opts
     end
+
     def call(env)
       began_at = Time.now
       status, headers, response = @app.call(env)
       headers = HeaderHash.new(headers)
 
-      log(env, status, headers, began_at)
-      
-#       if !STATUS_WITH_NO_ENTITY_BODY.include?(status) &&
-#          !headers['Content-Length'] &&
-#          !headers['Transfer-Encoding'] &&
-#          (body.respond_to?(:to_ary) || body.respond_to?(:to_str))
+      if !STATUS_WITH_NO_ENTITY_BODY.include?(status) &&
+         !headers['transfer-encoding'] &&
+          headers['content-type'] &&
+          headers['content-type'].include?("text/html")
 
-#         length = body.to_ary.inject(0) { |len, part| len + bytesize(part) }
-#         headers['Content-Length'] = length.to_s
-#       end
-      
-      if headers['Content-Type'] != nil && headers['Content-Type'].include?("text/html")
         content = ""
         response.each { |part| content += part }
         doc = Hpricot(content)
@@ -41,10 +33,11 @@ module Rack
           s = node.inner_html || "[++where is the code?++]"
           node.parent.swap(send(@highlighter, s))
         end
-        STDERR.puts "Highlighting code with: #{@highlighter}"
+
         body = doc.to_html
-        size = body.respond_to?(:bytesize) ? body.bytesize : body.size
-        headers['Content-Length'] = size.to_s
+        headers['content-length'] = body.bytesize.to_s
+
+        log(env, status, headers, began_at) if @opts[:logging]
         [status, headers, [body]]
       else
         [status, headers, response]  
@@ -56,19 +49,18 @@ module Rack
     def log(env, status, headers, began_at)
       # lilith.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n
       now = Time.now
-      length = 1024 # ???
-      logger = env['rack.errors']
+       logger = env['rack.errors']
       logger.write FORMAT % [
         env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-",
         @highlighter,
-        headers["content-type"] || "unknown",
         now.strftime("%d/%b/%Y %H:%M:%S"),
         env["REQUEST_METHOD"],
         env["PATH_INFO"],
         env["QUERY_STRING"].empty? ? "" : "?"+env["QUERY_STRING"],
         env["HTTP_VERSION"],
+        headers["content-type"] || "unknown",
         status.to_s[0..3],
-        length,
+        headers['content-length'],
         now - began_at
       ]
     end
@@ -132,7 +124,7 @@ module Rack
     end
     
     def unescape_html(string)
-      string.gsub("&lt;", '<').gsub("&gt;", '>').gsub("&amp;", '&')
+      string.to_s.gsub("&lt;", '<').gsub("&gt;", '>').gsub("&amp;", '&')
     end
     
   end
