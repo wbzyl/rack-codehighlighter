@@ -124,7 +124,7 @@ module Rack
       if refs
         lang = refs[1]
         str = unescape_html(string.sub(@opts[:pattern], ""))
-        "<pre class='#{opts[:theme]}'>#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}</pre>"
+        "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}"
       else
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
