@@ -12,9 +12,9 @@ require 'sinatra/rdiscount'
 
 require 'codehighlighter-middleware'
 
-require 'coderay'                 # Coderay
-#require 'syntax/convertors/html' # Syntax
-#require 'uv'                     # Ultraviolet
+require 'coderay'                # Coderay
+require 'syntax/convertors/html' # Syntax
+require 'uv'                     # Ultraviolet
 
 get "/" do
   rdiscount :index

@@ -12,7 +12,10 @@ module Rack
     def initialize(app, highlighter = :coderay, opts = {})
       @app = app
       @highlighter = highlighter
-      @opts = opts
+      
+      @opts = { :element => "//pre/code", :pattern => /\A:::(\w+)\s*\n/ }
+      
+      @opts.merge! opts
     end
 
     def call(env)
@@ -28,7 +31,7 @@ module Rack
         content = ""
         response.each { |part| content += part }
         doc = Hpricot(content)
-        nodes = doc.search("//pre/code")
+        nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
           node.parent.swap(send(@highlighter, s))
@@ -72,9 +75,10 @@ module Rack
         'css' => 'css21',
         'sql' => 'sqlite'
       }
-      lang = "unknown"
-      if /\A:::(\w+)\s*\n/ =~ string  # extract language name
-        lang = $1
+      lang = 'unknown'
+      refs = @opts[:pattern].match(string)  # extract language name
+      if refs
+        lang = refs[1]
         convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
         convertor.convert(unescape_html(string.sub(/\A.*\n/, "")) || "[=this can'n happen=]")
       else
@@ -83,10 +87,11 @@ module Rack
     end
     
     def coderay(string)
-      lang = "unknown"
-      if /\A:::(\w+)\s*\n/ =~ string  # extract language name
-        lang = $1
-        str = unescape_html(string.sub(/\A.*\n/, ""))
+      lang = 'unknown'
+      refs = @opts[:pattern].match(string)  # extract language name
+      if refs
+        lang = refs[1]
+        str = unescape_html(string.sub(@opts[:pattern], ""))
         "<pre class='CodeRay'>#{::CodeRay.encoder(:html).encode str, lang}</pre>"
       else
         "<pre class='CodeRay'>#{string}</pre>"
@@ -100,10 +105,11 @@ module Rack
         'javascript' => 'js',
         'python' => 'py'
       }
-      lang = "unknown"
-      if /\A:::(\w+)\s*\n/ =~ string  # extract language name
-        lang = $1
-        str = string.sub(/\A.*\n/, "")
+      lang = 'unknown'
+      refs = @opts[:pattern].match(string)  # extract language name
+      if refs 
+        lang = refs[1]
+        str = string.sub(@opts[:pattern], "")
         "<pre class='prettyprint lang-#{translate[lang] || lang}'>#{str}</pre>"
       else
         "<pre>#{string}</pre>"
@@ -111,12 +117,13 @@ module Rack
     end
 
     def ultraviolet(string)
-      opts = { :theme => 'espresso_libre', :lines => false }
+      opts = { :theme => 'dawn', :lines => false }
       opts.merge! @opts
       lang = 'text'
-      if /\A:::(\w+)\s*\n/ =~ string  # extract language name
-        lang = $1
-        str = unescape_html(string.sub(/\A.*\n/, ""))
+      refs = @opts[:pattern].match(string)  # extract language name
+      if refs
+        lang = refs[1]
+        str = unescape_html(string.sub(@opts[:pattern], ""))
         "<pre class='#{opts[:theme]}'>#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}</pre>"
       else
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
