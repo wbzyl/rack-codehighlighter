@@ -1,22 +1,21 @@
-require "rubygems"
-require "rake/gempackagetask"
-require "rake/clean"
-#require "spec/rake/spectask"
-
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '/lib')
+require "rake"
 
 begin
   require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name         = "rack-codehighlighter"
-    s.summary      = "Rack Middleware for Code Highlighting."
-    s.email        = "matwb@univ.gda.pl"  
-    s.homepage     = "http://github.com/wbzyl/rack-codehighlighter"
-    s.authors      = ["Wlodek Bzyl"]
-    s.description  = s.summary
-  
-    #  s.add_dependency 'coderay', '>=0.8.312'
-    s.add_dependency 'hpricot', '>=0.8.1'   
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name         = "rack-codehighlighter"
+    gemspec.summary      = "Rack Middleware for Code Highlighting."
+    gemspec.email        = "matwb@univ.gda.pl"  
+    gemspec.homepage     = "http://github.com/wbzyl/rack-codehighlighter"
+    gemspec.authors      = ["Wlodek Bzyl"]
+    gemspec.description  = gemspec.summary
+    
+    gemspec.files = FileList['lib/**/*.rb', "examples/**/*"]
+    
+    gemspec.add_runtime_dependency 'rack', '>=1.0.0'
+    gemspec.add_runtime_dependency 'hpricot', '>=0.8.1'   
+    
+    gemspec.add_development_dependency 'rack-test', '>=0.3.0'
   end
 rescue LoadError
   puts "Jeweler not available."
@@ -29,11 +28,3 @@ end
 #  t.pattern = 'test/**/*_test.rb'
 #  t.verbose = false
 #end
-
-desc 'Install the package as a gem.'
-task :install => [:clean, :build] do
-  gem = Dir['pkg/*.gem'].last
-  sh "sudo gem install --no-rdoc --no-ri --local #{gem}"
-end
-
-task :default => :test
