@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-codehighlighter}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
@@ -41,7 +41,6 @@ Gem::Specification.new do |s|
      "examples/public/stylesheets/uv/zenburnesque.css",
      "examples/views/index.rdiscount",
      "examples/views/layout.rdiscount",
-     "lib/codehighlighter-middleware.rb",
      "lib/rack/codehighlighter.rb"
   ]
   s.homepage = %q{http://github.com/wbzyl/rack-codehighlighter}
