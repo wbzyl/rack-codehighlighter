@@ -5,7 +5,7 @@ of exisitng code highlighters to make their usage as generic possible.
 
 To install it, run:
 
-    sudo gem install wbzyl-codehighlighter-middleware -s http://gems.github.com
+    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
 Markup your code with:
 
@@ -19,10 +19,15 @@ Example (incomplete html, needs a layout file with link to css):
 
     require 'rubygems'
     require 'sinatra'
+
+    gem 'coderay'
     require 'coderay'    # use the Coderay highlighter
     
     gem 'wbzyl-sinatra-rdiscount'
-    require 'wbzyl-codehighlighter-middleware'
+    require 'sinatra/rdiscount'
+
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
     
     use Rack::Codehighlighter, :coderay
     
