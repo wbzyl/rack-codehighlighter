@@ -8,10 +8,10 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '/lib')
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name         = "codehighlighter-middleware"
+    s.name         = "rack-codehighlighter"
     s.summary      = "Rack Middleware for Code Highlighting."
     s.email        = "matwb@univ.gda.pl"  
-    s.homepage     = "http://github.com/wbzyl/codehighlighter-middleware"
+    s.homepage     = "http://github.com/wbzyl/rack-codehighlighter"
     s.authors      = ["Wlodek Bzyl"]
     s.description  = s.summary
   
