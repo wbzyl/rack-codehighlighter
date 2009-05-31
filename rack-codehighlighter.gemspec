@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-codehighlighter}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
@@ -14,13 +14,7 @@ Gem::Specification.new do |s|
      "README.markdown"
   ]
   s.files = [
-    ".gitignore",
-     "LICENSE",
-     "README.markdown",
-     "Rakefile",
-     "TODO",
-     "VERSION.yml",
-     "examples/app.rb",
+    "examples/app.rb",
      "examples/config.ru",
      "examples/public/javascripts/lang-css.js",
      "examples/public/javascripts/lang-hs.js",
@@ -46,7 +40,9 @@ Gem::Specification.new do |s|
      "examples/public/stylesheets/uv/twilight.css",
      "examples/public/stylesheets/uv/zenburnesque.css",
      "examples/views/index.rdiscount",
-     "examples/views/layout.rdiscount"
+     "examples/views/layout.rdiscount",
+     "lib/codehighlighter-middleware.rb",
+     "lib/rack/codehighlighter.rb"
   ]
   s.homepage = %q{http://github.com/wbzyl/rack-codehighlighter}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -62,11 +58,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rack>, [">= 1.0.0"])
       s.add_runtime_dependency(%q<hpricot>, [">= 0.8.1"])
+      s.add_development_dependency(%q<rack-test>, [">= 0.3.0"])
     else
+      s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<hpricot>, [">= 0.8.1"])
+      s.add_dependency(%q<rack-test>, [">= 0.3.0"])
     end
   else
+    s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<hpricot>, [">= 0.8.1"])
+    s.add_dependency(%q<rack-test>, [">= 0.3.0"])
   end
 end
