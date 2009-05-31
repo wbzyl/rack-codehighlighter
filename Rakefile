@@ -10,7 +10,7 @@ begin
     gemspec.authors      = ["Wlodek Bzyl"]
     gemspec.description  = gemspec.summary
     
-    gemspec.files = FileList['lib/**/*.rb', "examples/**/*"]
+    gemspec.files = %w[LICENSE TODO Rakefile VERSION.yml] + FileList['lib/**/*.rb', "examples/**/*"]
     
     gemspec.add_runtime_dependency 'rack', '>=1.0.0'
     gemspec.add_runtime_dependency 'hpricot', '>=0.8.1'   
