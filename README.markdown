@@ -139,7 +139,7 @@ Now, install the gem:
 
     sudo gem install ultraviolet
 
-[Ultraviolet themes gallery](: http://ultraviolet.rubyforge.org/themes.xhtml)
+See also [Ultraviolet themes gallery](http://ultraviolet.rubyforge.org/themes.xhtml)
 
 Ultraviolet supports almost any language:
 
