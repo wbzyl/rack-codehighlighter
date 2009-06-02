@@ -7,6 +7,10 @@ To install it, run:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
+## Why?
+
+## Usage
+
 Markup your code with:
 
     <pre><code>:::ruby
@@ -104,16 +108,10 @@ I added support for these languages:
 
 Supported languages:
 
-* C
-* CSS
-* Delphi
-* diff
-* HTML
-* RHTML (Rails)
-* Nitro-XHTML
-* Java
-* JavaScript
-* JSON
+* C, CSS
+* Delphi, diff
+* HTML, RHTML (Rails), Nitro-XHTML
+* Java, JavaScript, JSON
 * Ruby
 * YAML
 
@@ -126,8 +124,7 @@ Supported languages:
 * java, js, m, mxml, perl, pl, pm, py, rb, sh,
 * xhtml, xml, xsl
 
-
-### Ultraviolet
+### [Ultraviolet](http://ultraviolet.rubyforge.org/)
 
 The *ultraviolet* gem needs oniguruma regexp library.
 
@@ -146,161 +143,35 @@ Now, install the gem:
 
 Ultraviolet supports almost any language:
 
-* actionscript
-* active4d
-* active4d\_html
-* active4d\_ini
-* active4d\_library
-* ada
-* antlr
-* apache
-* applescript
-* asp
-* asp\_vb.net
-* bibtex
-* blog\_html
-* blog\_markdown
-* blog\_text
-* blog\_textile
-* build
-* bulletin\_board
-* c
-* c++
-* cake
-* camlp4
-* cm
-* coldfusion
-* context\_free
-* cs
-* css
-* css\_experimental
-* csv
-* d
-* diff
-* dokuwiki
-* dot
-* doxygen
-* dylan
-* eiffel
-* erlang
-* f-script
-* fortran
-* fxscript
-* greasemonkey
-* gri
-* groovy
-* gtd
-* gtdalt
-* haml
-* haskell
-* html
-* html-asp
-* html\_django
-* html\_for\_asp.net
-* html\_mason
-* html\_rails
-* html\_tcl
-* icalendar
-* inform
-* ini
-* installer\_distribution\_script
-* io
-* java
-* javaproperties
-* javascript
-* javascript\_+\_prototype
-* javascript\_+\_prototype\_bracketed
-* jquery\_javascript
-* json
-* languagedefinition
-* latex
-* latex\_beamer
-* latex\_log
-* latex\_memoir
-* lexflex
-* lighttpd
-* lilypond
-* lisp
-* literate\_haskell
-* logo
-* logtalk
-* lua
-* m
-* macports\_portfile
-* mail
-* makefile
-* man
-* markdown
-* mediawiki
-* mel
-* mips
-* mod\_perl
-* modula-3
-* moinmoin
-* mootools
-* movable\_type
-* multimarkdown
-* objective-c
-* objective-c++
-* ocaml
-* ocamllex
-* ocamlyacc
-* opengl
-* pascal
-* perl
-* php
-* plain\_text
-* pmwiki
-* postscript
-* processing
-* prolog
-* property\_list
-* python
-* python\_django
-* qmake\_project
-* qt\_c++
-* quake3\_config
-* r
-* r\_console
-* ragel
-* rd\_r\_documentation
-* regexp
-* regular\_expressions\_oniguruma
-* regular\_expressions\_python
-* release\_notes
-* remind
-* restructuredtext
-* rez
-* ruby
-* ruby\_experimental
-* ruby\_on\_rails
-* s5
-* scheme
-* scilab
-* setext
-* shell-unix-generic
-* slate
-* smarty
-* sql
-* sql\_rails
-* ssh-config
-* standard\_ml
-* strings\_file
-* subversion\_commit\_message
-* sweave
-* swig
-* tcl
-* template\_toolkit
-* tex
-* tex\_math
-* textile
-* tsv
-* twiki
-* txt2tags
+* actionscript, active4d, active4d\_html, active4d\_ini, active4d\_library,
+  ada, antlr, apache, applescript, asp, asp\_vb.net
+* bibtex, blog\_html, blog\_markdown, blog\_text, blog\_textile, build,
+  bulletin\_board
+* c, c++, cake, camlp4, cm, coldusion, context\_free, cs, css, css\_experimental,
+  csv
+* d, diff, dokuwiki, dot, doxygen, dylan
+* eiffel, erlang, f-script, fortran, fxscript
+* greasemonkey, gri, groovy, gtd, gtdalt
+* haml, haskell, html, html-asp, html\_django, html\_for\_asp.net, html\_mason,
+  html\_rails, html\_tcl
+* icalendar, inform, ini, installer\_distribution\_script, io
+* java, javaproperties, javascript, javascript\_+\_prototype, 
+  javascript\_+\_prototype\_bracketed, jquery\_javascript, json
+* languagedefinition, latex, latex\_beamer, latex\_log, latex\_memoir, lexflex,
+  lighttpd, lilypond, lisp, literate\_haskell, logo, logtalk, lua
+* m, macports\_portfile, mail, makefile, man, markdown, mediawiki, mel,
+  mips, mod\_perl, modula-3, moinmoin, mootools, movable\_type, multimarkdown
+* objective-c, objective-c++, ocaml, ocamllex, ocamlyacc, opengl
+* pascal, perl, php, plain\_text, pmwiki, postscript, processing,
+  prolog, property\_list, python, python\_django
+* qmake\_project, qt\_c++, quake3\_config
+* r, r\_console, ragel, rd\_r\_documentation, regexp,
+  regular\_expressions\_oniguruma, regular\_expressions\_python, release\_notes
+  remind, restructuredtext, rez, ruby, ruby\_experimental, ruby\_on\_rails
+* s5, scheme, scilab, setext, shell-unix-generic, slate, smarty,
+  sql, sql\_rails, ssh-config, standard\_ml, strings\_file, subversion\_commit\_message,
+  sweave, swig
+* tcl, template\_toolkit, tex, tex\_math, textile, tsv, twiki, txt2tags
 * vectorscript
-* xhtml\_1.0
-* xml
-* xml\_strict
-* xsl
-* yaml
-* yui\_javascript
+* xhtml\_1.0, xml, xml\_strict, xsl
+* yaml, yui\_javascript
