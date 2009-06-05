@@ -1,9 +1,8 @@
 # Rack Middleware for Code Highlighting
 
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-„Think about what you are doing, try to understand it, come up with a
-better solution, etc.”
-
+Think about what you are doing, try to understand it, come up with a
+better solution, etc.
 
 The *Codehighlighter* gem provides a thin interface over a bunch 
 of exisitng code highlighters to make their usage as generic possible.
@@ -12,28 +11,58 @@ To install it, run:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
-## Quotations
+## Using with Rack application
 
-The idea behind contextual development is simple: an API should be a
-be a byproduct of good design. Meaning you should never have to
-explicitly build an API. It should, in essence, be an "accident".
-[resourcelogic](http://github.com/binarylogic/resourcelogic/)
+*Rack::Codehighlighter* can be used with any Rack application, for example with
+a **Sinatra** application. If your application includes a rackup file or
+uses *Rack::Builder* to construct the application pipeline, simply
+require and use as follows:
 
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
+    
+    gem 'ultraviolet'
+    require 'uv'
+    
+    use Rack::Codehighlighter, :ultraviolet
+    run app
+
+Instead of *ultraviolet* you can use other supported highlighters:
+*syntax*, *coderay*, *prettify*.
+
+Include in the layout one of provided stylesheets.
+
+## Using with Rails
+
+In order to use include the following in a Rails application
+`config/environment.rb` file:
+
+    require 'rack/codehighlighter'
+    
+    Rails::Initializer.run do |config|  
+      config.gem 'wbzyl-rack-codehighlighter'
+      config.middleware.use Rack::Codehighlighter, :ultraviolet
+    end  
+
+Check the Rack configuration:
+
+    rake middleware
+
+More configuration options: see below.
+
+
+## Why should I use it?
+
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 I can not tell you how much time I’ve wasted trying to add in some
 cool feature into rails. I would dig into the rails internals,
 override methods, do all kinds of tricky stuff. I thought I was
 awesome. A month later rails comes out with some cool new feature, I
 update rails and everything explodes.
+
 *Is it Rack a cool feature?*
 
-Keep your documentation with your code.
-
-use rdoc take 5 minutes to learn it: document public methods,
-describe the final html format.
-
-## Why?
-
-Exisitng paractice is obtrusive:
+Exisitng practice is obtrusive:
 
     http://carboni.ca/projects/harsh/  
       unless HAML is used
@@ -46,20 +75,12 @@ Exisitng paractice is obtrusive:
     
 Pure Javascript highlighters:
 
-
 In Ruby on Rails (redcloth)
 
-Ruby on Rails provides you with a textilize helper. You probably want
-to override it. Something like this is probably sensible:
-
-    module ApplicationHelper
-      def textilize(text)
-        RedCloth.new(text).to_html(:textile, :refs_syntax_highlighter)
-      end
-    end
+Add censored method/example.
 
 
-## Usage
+## Configuration options
 
 Markup your code with:
 
@@ -67,19 +88,18 @@ Markup your code with:
     ...
     </code></pre>
 
+## Quick Sinatra example
+
 Example (incomplete html, needs a layout file with link to css):
 
-    # file simple.rb
+    # file example.rb
 
     require 'rubygems'
     require 'sinatra'
 
     gem 'coderay'
-    require 'coderay'    # use the Coderay highlighter
+    require 'coderay'
     
-    gem 'wbzyl-sinatra-rdiscount'
-    require 'sinatra/rdiscount'
-
     gem 'wbzyl-rack-codehighlighter'
     require 'rack/codehighlighter'
     
@@ -104,19 +124,18 @@ Example (incomplete html, needs a layout file with link to css):
     end
     </code></pre>
 
-## An example
+Run the above example with:
 
-The Codehighlighter follows the same syntax as regular Markdown
-code blocks, with one exception. It needs to know what
-language to use for the code block.
+    ruby example.rb
+
+
+## More Sinatra examples
+
+The default markup:
 
 If the first line begins with three colons, the text following
 the colons identifies the language (ruby in the example). 
 The first line is removed from the code block before processing.
-
-Run the above example with:
-
-    ruby simple.rb
 
 The directory *examples* contains ready to run, simple Sinatra app. Try
 
@@ -137,26 +156,19 @@ and contemplate the sheer beauty of the rendered code.
 ## Supported Highlighters
 
 These currently include: *Syntax* (fast), *Coderay* (very fast), 
-*Ultraviolet* (slow).
+*Ultraviolet* (slow, but highlights almost any language).
 
-### Syntax
+### [Syntax](http://syntax.rubyforge.org/)
 
-Supported languages: 
+Languages supported by *Syntax*: 
 
 * xml
 * ruby
 
-I added support for these languages:
-
-* ansic 
-* javascript
-* css21
-* sqlite
-
 
 ### [Coderay](http://coderay.rubychan.de/)
 
-Supported languages:
+Languages supported by *Coderay*:
 
 * C, CSS
 * Delphi, diff
@@ -167,7 +179,7 @@ Supported languages:
 
 ### [Google Code Prettify](http://code.google.com/p/google-code-prettify/), pure Javascript
 
-Supported languages:
+Languages supported by *Prettify*:
 
 * css, lisp, hs, lua, sql, vb, wiki,
 * bsh, c, cc, cpp, cs, csh, cyc, cv, htm, html,
