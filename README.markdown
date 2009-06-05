@@ -1,8 +1,9 @@
 # Rack Middleware for Code Highlighting
 
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 „Think about what you are doing, try to understand it, come up with a
 better solution, etc.”
-[Ruby tips from me, your idol](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol)
+
 
 The *Codehighlighter* gem provides a thin interface over a bunch 
 of exisitng code highlighters to make their usage as generic possible.
@@ -23,7 +24,7 @@ cool feature into rails. I would dig into the rails internals,
 override methods, do all kinds of tricky stuff. I thought I was
 awesome. A month later rails comes out with some cool new feature, I
 update rails and everything explodes.
-*Is it Rack a cool feture?*
+*Is it Rack a cool feature?*
 
 Keep your documentation with your code.
 
