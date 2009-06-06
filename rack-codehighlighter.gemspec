@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-codehighlighter}
-  s.version = "0.1.7"
+  s.version = "0.1.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "examples/public/javascripts/lang-wiki.js",
      "examples/public/javascripts/prettify.js",
      "examples/public/stylesheets/application.css",
+     "examples/public/stylesheets/censor.css",
      "examples/public/stylesheets/coderay.css",
      "examples/public/stylesheets/prettify.css",
      "examples/public/stylesheets/syntax.css",
