@@ -42,8 +42,6 @@ because the default values for options are used.
 
 ## A simple example with inline template
 
-Sinatra example:
-
     # example.rb
 
     require 'rubygems'
@@ -121,13 +119,14 @@ a **Sinatra** application. If your application includes a rackup file or
 uses *Rack::Builder* to construct the application pipeline, simply
 require and use as follows:
 
-    gem 'wbzyl-rack-codehighlighter'
-    require 'rack/codehighlighter'
-    
+    # get one of supported highlighters 
     gem 'coderay'
     require 'coderay'
-    
-    use Rack::Codehighlighter, :coderay  # add more options
+     
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
+     
+    use Rack::Codehighlighter, :coderay
     run app
 
 Remember to include in the layout an appropriate stylesheet 
@@ -140,11 +139,15 @@ for sample stylesheets).
 In order to use include the following in a Rails application
 `config/environment.rb` file:
 
+    # get one of supported highlighters 
+    require 'coderay'
     require 'rack/codehighlighter'
     
     Rails::Initializer.run do |config|  
+      config.gem 'coderay'
       config.gem 'wbzyl-rack-codehighlighter'
-      config.middleware.use Rack::Codehighlighter, :coderay  # add more options
+        
+      config.middleware.use Rack::Codehighlighter, :coderay
     end  
 
 Check the Rack configuration:
