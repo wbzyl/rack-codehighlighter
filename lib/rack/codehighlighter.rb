@@ -16,7 +16,7 @@ module Rack
       @opts = {
         :element => "//pre",
         :pattern => /\A:::(\w+)\s*\n/,
-        :reason => "[...ugly code removed...]"
+        :reason => "[[--  ugly code removed  --]]"
       }
       @opts.merge! opts
     end

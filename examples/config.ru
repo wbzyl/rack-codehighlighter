@@ -14,6 +14,6 @@ use Rack::Codehighlighter, :coderay,  :element => "//pre", :pattern => /\A:::(\w
 #use Rack::Codehighlighter, :ultraviolet, :theme => 'dawn',
 #                                       :element => "//pre", :pattern => /\A:::(\w+)\s*\n/, :logging => true
 
-#use Rack::Codehighlighter, :censor, :reason => '[[-- removed ugly code --]]'
+#use Rack::Codehighlighter, :censor, :reason => '[[--  ugly code removed  --]]'
 
 run Sinatra::Application
