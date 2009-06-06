@@ -37,7 +37,7 @@ The above example could be shortened to:
 
     use Rack::Codehighlighter, :coderay
 
-because the default values are used for options.
+because the default values for options are used.
 
 
 ## A simple example with inline template
