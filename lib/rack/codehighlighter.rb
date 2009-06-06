@@ -76,6 +76,7 @@ module Rack
     end
     
     def censor(string)
+      # instead of pre the original/matched tag should be used
       "<pre class='censor'>#{@opts[:reason]}</pre>"
     end
 
@@ -93,6 +94,7 @@ module Rack
         convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
         convertor.convert(unescape_html(string.sub(/\A.*\n/, "")) || "[=this can'n happen=]")
       else
+        # instead of pre the original/matched tag should be used
         "<pre>#{string}</pre>"
       end
     end
@@ -100,6 +102,7 @@ module Rack
     def coderay(string)
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
+      # instead of pre the original/matched tag should be used
       if refs
         lang = refs[1]
         str = unescape_html(string.sub(@opts[:pattern], ""))
@@ -118,6 +121,7 @@ module Rack
       }
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
+      # instead of pre the original/matched tag should be used      
       if refs 
         lang = refs[1]
         str = string.sub(@opts[:pattern], "")
@@ -137,6 +141,7 @@ module Rack
         str = unescape_html(string.sub(@opts[:pattern], ""))
         "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}"
       else
+        # instead of pre the original/matched tag should be used        
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
     end
