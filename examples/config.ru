@@ -5,9 +5,11 @@
 require 'app'
 
 use Rack::Lint
+#use Rack::Codehighlighter, :prettify, :logging => true
 
 #use Rack::Codehighlighter, :coderay, :logging => true
 #use Rack::Codehighlighter, :syntax, :logging => true
-use Rack::Codehighlighter, :ultraviolet, :theme => 'dawn', :logging => true
-#use Rack::Codehighlighter, :prettify, :logging => true
+
+use Rack::Codehighlighter, :ultraviolet, :theme => 'dawn', :logging => true, :pattern => '//pre'
+
 run Sinatra::Application

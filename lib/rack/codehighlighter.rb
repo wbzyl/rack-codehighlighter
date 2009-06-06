@@ -13,11 +13,11 @@ module Rack
     def initialize(app, highlighter = :coderay, opts = {})
       @app = app
       @highlighter = highlighter
-      
-      @opts = { :element => "//pre/code",
+      @opts = {
+        :element => "//pre",
         :pattern => /\A:::(\w+)\s*\n/,
-        :reason => "[...ugly code removed...]" }
-      
+        :reason => "[...ugly code removed...]"
+      }
       @opts.merge! opts
     end
 
@@ -37,7 +37,11 @@ module Rack
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
-          node.parent.swap(send(@highlighter, s))
+          if @opts[:remove_parent_element]
+            node.parent.swap(send(@highlighter, s))  
+          else
+            node.swap(send(@highlighter, s))            
+          end
         end
 
         body = doc.to_html
@@ -55,7 +59,7 @@ module Rack
     def log(env, status, headers, began_at)
       # lilith.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n
       now = Time.now
-       logger = env['rack.errors']
+      logger = env['rack.errors']
       logger.write FORMAT % [
         env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-",
         @highlighter,
