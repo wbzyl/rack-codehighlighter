@@ -14,6 +14,8 @@ override methods, do all kinds of tricky stuff. I thought I was
 awesome. A month later rails comes out with some cool new feature, I
 update rails and everything explodes.
 
+Code must be html-escaped.
+
 2. gems (ok) + conection (obtrusive)
 
 
