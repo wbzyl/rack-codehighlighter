@@ -76,7 +76,7 @@ module Rack
     end
     
     def censor(string)
-      "<pre>#{@opts[:reason]}</pre>"
+      "<pre class='censor'>#{@opts[:reason]}</pre>"
     end
 
     def syntax(string)
