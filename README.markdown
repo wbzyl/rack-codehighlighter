@@ -1,123 +1,54 @@
 # Rack::Codehighlighter middleware
 
 *Rack::Codehighlighter* provides a thin wrapper over 
-a bunch of code highlighters: 
+a bunch of code highlighters to make their usage as generic possible.
 
 * ultraviolet
 * coderay
 * syntax
 * prettify
+* censor
 
-It reads HTML produced by an application where it looks for code blocks
-to highlight. For example, below we ask *coderay* to highlight all `pre`
-elements:
+Install the gem with:
+
+    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
+
+
+The middleware reads HTML produced by an application, where it looks
+for code blocks to highlight. Below we ask *coderay* to
+highlight all `pre` elements:
 
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-The middleware uses the `/\A:::(\w+)\s*\n/` pattern to
-learn what language the code block contains. For example
+The middleware uses the pattern to learn what language the code block
+contains, for example
 
     <pre>:::ruby
     puts "hello world"
     </pre>
 
+Plain description what the pattern says: 
+If the element contents begins with three colons, the text following
+the colons, up to the end of line, identifies the language. The text
+matched by the pattern is removed from the code block before
+processing.
+
 The above example could be shortened to:
 
     use Rack::Codehighlighter, :coderay
 
-because we used the default values for options.
+because the default values are used for options.
 
 
-## Why using middleware for code highlighting is awesome?
-
-In pre-Rack applications era possible approaches were:
-
-1. pure javascript; cons code must be html-escaped
-
-2. gems;  conection to methods responsible for code highlighting
-   is obtrusive, i.e. via plugin + additional markup
-
-Analyze packages mentioned at the *The Ruby Toolbox* page:
-[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
-
-Links to sources
-
-    http://carboni.ca/projects/harsh/  
-      unless HAML is used
-    http://redclothcoderay.rubyforge.org/  
-    http://github.com/augustl/redcloth-with-coderay
-      how to use with Rails
-      does't degrade to html: new source tag
-    http://github.com/arya/tm_syntax_highlighting/
-      how to connect to rails/sinatra?
-
-Add censored method/example.
-
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-I can not tell you how much time I’ve wasted trying to add in some
-cool feature into rails. I would dig into the rails internals,
-override methods, do all kinds of tricky stuff. I thought I was
-awesome. A month later rails comes out with some cool new feature, I
-update rails and everything explodes.
-
-Conclusion: highlighting via plugins is doomed to explode sooner or later.
-
-
-## Using with Rack application
-
-First install the gem:
-
-    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
-
-*Rack::Codehighlighter* can be used with any Rack application, for example with
-a **Sinatra** application. If your application includes a rackup file or
-uses *Rack::Builder* to construct the application pipeline, simply
-require and use as follows:
-
-    gem 'wbzyl-rack-codehighlighter'
-    require 'rack/codehighlighter'
-    
-    gem 'coderay'
-    require 'coderay'
-    
-    use Rack::Codehighlighter, :coderay  # more options
-    run app
-
-Instead of *coderay* you can use other supported highlighters.
-Remember to include in the layout one of provided stylesheets
-(look into `examples/public/stylesheets` for sample stylesheets.
-
-## Using with Rails
-
-In order to use include the following in a Rails application
-`config/environment.rb` file:
-
-    require 'rack/codehighlighter'
-    
-    Rails::Initializer.run do |config|  
-      config.gem 'wbzyl-rack-codehighlighter'
-      config.middleware.use Rack::Codehighlighter, :ultraviolet
-    end  
-
-Check the Rack configuration:
-
-    rake middleware
-
-Remember to include in the layout one of provided stylesheets
-(look into `examples/public/stylesheets` for sample stylesheets.
-
-
-## Configuration options
-
-Show one complete example for each supported hilighter.
-
-## Quick Sinatra example
+## A simple example with inline template
 
 Sinatra example:
 
-    # file example.rb
+    # example.rb
 
     require 'rubygems'
+      
+    gem 'sinatra', '>=0.9.0'
     require 'sinatra'
 
     gem 'wbzyl-rack-codehighlighter', '>=0.2.0'
@@ -134,7 +65,7 @@ Sinatra example:
     @@ hello
     <h3>Fibonacci numbers in Ruby</h3>
     
-    <pre><code>:::ruby
+    <pre>:::ruby
     def fib(n)
       if n < 2
         1
@@ -142,46 +73,99 @@ Sinatra example:
         fib(n-2) + fib(n-1)
       end
     end
-    </code></pre>
+    </pre>
 
 Run the above example with:
 
     ruby example.rb
 
-
-## More Sinatra examples
-
-The default markup:
-
-If the first line begins with three colons, the text following
-the colons identifies the language (ruby in the example). 
-The first line is removed from the code block before processing.
-
-The directory *examples* contains ready to run, simple Sinatra app. Try
-
-    rackup -p 4567 config.ru
-
-or better yet (requires the *thin* gem to be installed):
-
-    thin --rackup config.ru -p 4567 start
+The results are accessible from `http://localhost:4567`.
 
 
-Finally, visit the following url:
+## Why using middleware for code highlighting is awesome?
 
-    http://localhost:4567
+In pre-Rack applications era possible approaches were:
 
-and contemplate the sheer beauty of the rendered code.
+* pure javascript; cons code must be html-escaped
+* gems;  conection to methods responsible for code highlighting
+  is obtrusive, i.e. via plugin + additional markup
+
+Analyze packages mentioned at the *The Ruby Toolbox* page:
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+
+Links:
+
+    http://carboni.ca/projects/harsh/  
+      unless HAML is used
+    http://redclothcoderay.rubyforge.org/  
+    http://github.com/augustl/redcloth-with-coderay
+      how to use with Rails
+      does't degrade to html: new source tag
+    http://github.com/arya/tm_syntax_highlighting/
+      how to connect to rails/sinatra?
+
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
+I can not tell you how much time I’ve wasted trying to add in some
+cool feature into rails. I would dig into the rails internals,
+override methods, do all kinds of tricky stuff. I thought I was
+awesome. A month later rails comes out with some cool new feature, I
+update rails and everything explodes.
+
+Conclusion: highlighting via plugins is doomed to explode sooner or later.
 
 
-## Supported Highlighters
+## Using with Rack application
+
+*Rack::Codehighlighter* can be used with any Rack application, for example with
+a **Sinatra** application. If your application includes a rackup file or
+uses *Rack::Builder* to construct the application pipeline, simply
+require and use as follows:
+
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
+    
+    gem 'coderay'
+    require 'coderay'
+    
+    use Rack::Codehighlighter, :coderay  # add more options
+    run app
+
+Remember to include in the layout an appropriate stylesheet 
+(look into `examples/public/stylesheets` directory 
+for sample stylesheets).
+
+
+## Using with Rails
+
+In order to use include the following in a Rails application
+`config/environment.rb` file:
+
+    require 'rack/codehighlighter'
+    
+    Rails::Initializer.run do |config|  
+      config.gem 'wbzyl-rack-codehighlighter'
+      config.middleware.use Rack::Codehighlighter, :coderay  # add more options
+    end  
+
+Check the Rack configuration:
+
+    rake middleware
+
+Remember to include in the layout an appropriate stylesheet 
+(look into `examples/public/stylesheets` directory 
+for sample stylesheets).
+
+
+## Configuration options
+
+* Show one complete example for each supported highlighter..
+* List the default value of each option.
+
+
+## Supported highlighters
 
 These currently include: *Syntax* (fast), *Coderay* (very fast), 
 *Ultraviolet* (slow, but highlights almost any language).
-
-The *Codehighlighter* gem provides a thin interface over a bunch of
-exisitng code highlighters to make their usage as generic possible.
-
-What does it mean? Explain.
 
 
 ### [Syntax](http://syntax.rubyforge.org/)
