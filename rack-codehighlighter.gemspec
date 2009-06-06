@@ -43,8 +43,8 @@ Gem::Specification.new do |s|
      "examples/public/stylesheets/uv/sunburst.css",
      "examples/public/stylesheets/uv/twilight.css",
      "examples/public/stylesheets/uv/zenburnesque.css",
-     "examples/views/index.rdiscount",
-     "examples/views/layout.rdiscount",
+     "examples/views/index.erb",
+     "examples/views/layout.erb",
      "lib/rack/codehighlighter.rb"
   ]
   s.homepage = %q{http://github.com/wbzyl/rack-codehighlighter}

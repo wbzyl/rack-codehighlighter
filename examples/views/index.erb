@@ -1,0 +1,81 @@
+<h3>C</h3>
+
+<pre>:::c
+int a, b;  
+int main(int argc, char *argv[]) {  
+   hello();  
+   return 0;  
+}  
+void hello(void) {  
+   printf("hello world\n");  
+}
+</pre>
+
+<h3>html</h3>
+
+<pre>:::html
+<html>
+  <head>
+    <title>hello world</title>
+  </head>
+  <body>
+    <h1>hello world</h1>
+  </body>
+</html>
+</pre>
+
+<h3>ruby </h3>
+
+<pre>:::ruby
+def hello
+  puts 'hello world'
+end
+</pre>
+
+<h3>css21</h3>
+
+<pre>:::css
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #0C7D85;
+  line-height: 1.6;
+}
+body {
+  margin: 1em auto 1em auto;
+  padding: 1em 2em 2em 1em;
+  width: 760px;
+  border: 1px solid black;
+  background-color: #E8DDCB;
+}
+</pre>
+
+<h3>sqlite</h3>
+
+<pre>:::sql
+drop table if exists exams;  
+create table exams (  
+  id          integer       primary key autoincrement,  
+  student_id  integer       not null,  -- foreign key
+  result      integer       default 0 collate nocase,  
+  when        datetime
+);  
+</pre>
+
+<h3>javascript</h3>
+
+<pre>:::javascript
+for (var i = 0, length = properties.length; i < length; i++) {
+  var property = properties[i], value = source[property];
+  if (ancestor && Object.isFunction(value) &&
+          value.argumentNames().first() == "$super") {
+    var method = value, value = Object.extend((function(m) {
+          return function() { return ancestor[m].apply(this, arguments) };
+        })(property).wrap(method), {
+          valueOf:  function() { return method },
+          toString: function() { return method.toString() }
+        });
+  }
+  this.prototype[property] = value;
+}
+</pre>

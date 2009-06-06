@@ -5,17 +5,13 @@ $:.unshift(path) unless $:.include?(path)
 
 require 'rubygems'
 require 'sinatra'
-require 'rdiscount'
 
-gem 'wbzyl-sinatra-rdiscount'
-require 'sinatra/rdiscount'
-
-require 'codehighlighter-middleware'
+require 'rack/codehighlighter'
 
 require 'coderay'                # Coderay
 require 'syntax/convertors/html' # Syntax
 require 'uv'                     # Ultraviolet
 
 get "/" do
-  rdiscount :index
+  erb :index
 end

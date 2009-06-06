@@ -1,15 +1,17 @@
-# run with:  thin --rackup config.ru -p 4567 start
-
-#use Rack::Static, :urls => ["/stylesheets"], :root => "public"
-
 require 'app'
 
+use Rack::ShowExceptions
 use Rack::Lint
-#use Rack::Codehighlighter, :prettify, :logging => true
 
-#use Rack::Codehighlighter, :coderay, :logging => true
-#use Rack::Codehighlighter, :syntax, :logging => true
+#use Rack::Codehighlighter, :prettify, :element => "//pre", :pattern => /\A:::(\w+)\s*\n/, :logging => true
 
-use Rack::Codehighlighter, :ultraviolet, :theme => 'dawn', :logging => true, :pattern => '//pre'
+#use Rack::Codehighlighter, :coderay,  :element => "//pre", :pattern => /\A:::(\w+)\s*\n/, :logging => true
+
+#use Rack::Codehighlighter, :syntax,   :element => "//pre", :pattern => /\A:::(\w+)\s*\n/, :logging => true
+
+use Rack::Codehighlighter, :ultraviolet, :theme => 'dawn',
+                                       :element => "//pre", :pattern => /\A:::(\w+)\s*\n/, :logging => true
+
+#use Rack::Codehighlighter, :censor, :reason => '[[-- ugly code --]]'
 
 run Sinatra::Application
