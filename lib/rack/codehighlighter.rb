@@ -14,7 +14,9 @@ module Rack
       @app = app
       @highlighter = highlighter
       
-      @opts = { :element => "//pre/code", :pattern => /\A:::(\w+)\s*\n/ }
+      @opts = { :element => "//pre/code",
+        :pattern => /\A:::(\w+)\s*\n/,
+        :reason => "[...ugly code removed...]" }
       
       @opts.merge! opts
     end
@@ -69,6 +71,10 @@ module Rack
       ]
     end
     
+    def censor(string)
+      "<pre>#{@opts[:reason]}</pre>"
+    end
+
     def syntax(string)
       translate = {
         'html' => 'xml',

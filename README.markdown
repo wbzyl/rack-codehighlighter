@@ -1,15 +1,49 @@
 # Rack Middleware for Code Highlighting
 
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-Think about what you are doing, try to understand it, come up with a
-better solution, etc.
+Why one should use middleware (filter) for code highlighting?
+The short answer is: because it is unobtrusive.
 
-The *Codehighlighter* gem provides a thin interface over a bunch 
-of exisitng code highlighters to make their usage as generic possible.
+In pre-Rack applications era the possible approaches were:
+
+1. pure javascript
+
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
+I can not tell you how much time I’ve wasted trying to add in some
+cool feature into rails. I would dig into the rails internals,
+override methods, do all kinds of tricky stuff. I thought I was
+awesome. A month later rails comes out with some cool new feature, I
+update rails and everything explodes.
+
+2. gems (ok) + conection (obtrusive)
+
 
 To install it, run:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
+
+Analyze
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+packages from the *The Ruby Toolbox* page.
+
+Exisitng practice is obtrusive:
+
+    http://carboni.ca/projects/harsh/  
+      unless HAML is used
+    http://redclothcoderay.rubyforge.org/  
+    http://github.com/augustl/redcloth-with-coderay
+      how to use with Rails
+      does't degrade to html: new source tag
+    http://github.com/arya/tm_syntax_highlighting/
+      how to connect to rails/sinatra?
+    
+Pure Javascript highlighters:
+
+In Ruby on Rails (redcloth)
+
+Add censored method/example.
+
+
+
 
 ## Using with Rack application
 
@@ -51,33 +85,10 @@ Check the Rack configuration:
 More configuration options: see below.
 
 
-## Why should I use it?
-
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-I can not tell you how much time I’ve wasted trying to add in some
-cool feature into rails. I would dig into the rails internals,
-override methods, do all kinds of tricky stuff. I thought I was
-awesome. A month later rails comes out with some cool new feature, I
-update rails and everything explodes.
-
+Think about what you are doing, try to understand it, come up with a
+better solution, etc.
 *Is it Rack a cool feature?*
-
-Exisitng practice is obtrusive:
-
-    http://carboni.ca/projects/harsh/  
-      unless HAML is used
-    http://redclothcoderay.rubyforge.org/  
-    http://github.com/augustl/redcloth-with-coderay
-      how to use with Rails
-      does't degrade to html: new source tag
-    http://github.com/arya/tm_syntax_highlighting/
-      how to connect to rails/sinatra?
-    
-Pure Javascript highlighters:
-
-In Ruby on Rails (redcloth)
-
-Add censored method/example.
 
 
 ## Configuration options
@@ -157,6 +168,12 @@ and contemplate the sheer beauty of the rendered code.
 
 These currently include: *Syntax* (fast), *Coderay* (very fast), 
 *Ultraviolet* (slow, but highlights almost any language).
+
+The *Codehighlighter* gem provides a thin interface over a bunch of
+exisitng code highlighters to make their usage as generic possible.
+
+What does it mean? Explain.
+
 
 ### [Syntax](http://syntax.rubyforge.org/)
 
