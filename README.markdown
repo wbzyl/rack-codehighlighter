@@ -1,33 +1,46 @@
-# Rack Middleware for Code Highlighting
+# Rack::Codehighlighter middleware
 
-Why one should use middleware (filter) for code highlighting?
-The short answer is: because it is unobtrusive.
+*Rack::Codehighlighter* provides a thin wrapper over 
+a bunch of code highlighters: 
 
-In pre-Rack applications era the possible approaches were:
+* ultraviolet
+* coderay
+* syntax
+* prettify
 
-1. pure javascript
+It reads HTML produced by an application where it looks for code blocks
+to highlight. For example, below we ask *coderay* to highlight all `pre`
+elements:
 
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-I can not tell you how much time I’ve wasted trying to add in some
-cool feature into rails. I would dig into the rails internals,
-override methods, do all kinds of tricky stuff. I thought I was
-awesome. A month later rails comes out with some cool new feature, I
-update rails and everything explodes.
+    use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-Code must be html-escaped.
+The middleware uses the `/\A:::(\w+)\s*\n/` pattern to
+learn what language the code block contains. For example
 
-2. gems (ok) + conection (obtrusive)
+    <pre>:::ruby
+    puts "hello world"
+    </pre>
+
+The above example could be shortened to:
+
+    use Rack::Codehighlighter, :coderay
+
+because we used the default values for options.
 
 
-To install it, run:
+## Why using middleware for code highlighting is awesome?
 
-    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
+In pre-Rack applications era possible approaches were:
 
-Analyze
+1. pure javascript; cons code must be html-escaped
+
+2. gems;  conection to methods responsible for code highlighting
+   is obtrusive, i.e. via plugin + additional markup
+
+Analyze packages mentioned at the *The Ruby Toolbox* page:
 [Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
-packages from the *The Ruby Toolbox* page.
 
-Exisitng practice is obtrusive:
+Links to sources
 
     http://carboni.ca/projects/harsh/  
       unless HAML is used
@@ -37,17 +50,24 @@ Exisitng practice is obtrusive:
       does't degrade to html: new source tag
     http://github.com/arya/tm_syntax_highlighting/
       how to connect to rails/sinatra?
-    
-Pure Javascript highlighters:
-
-In Ruby on Rails (redcloth)
 
 Add censored method/example.
 
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
+I can not tell you how much time I’ve wasted trying to add in some
+cool feature into rails. I would dig into the rails internals,
+override methods, do all kinds of tricky stuff. I thought I was
+awesome. A month later rails comes out with some cool new feature, I
+update rails and everything explodes.
 
+Conclusion: highlighting via plugins is doomed to explode sooner or later.
 
 
 ## Using with Rack application
+
+First install the gem:
+
+    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
 *Rack::Codehighlighter* can be used with any Rack application, for example with
 a **Sinatra** application. If your application includes a rackup file or
@@ -57,16 +77,15 @@ require and use as follows:
     gem 'wbzyl-rack-codehighlighter'
     require 'rack/codehighlighter'
     
-    gem 'ultraviolet'
-    require 'uv'
+    gem 'coderay'
+    require 'coderay'
     
-    use Rack::Codehighlighter, :ultraviolet
+    use Rack::Codehighlighter, :coderay  # more options
     run app
 
-Instead of *ultraviolet* you can use other supported highlighters:
-*syntax*, *coderay*, *prettify*.
-
-Include in the layout one of provided stylesheets.
+Instead of *coderay* you can use other supported highlighters.
+Remember to include in the layout one of provided stylesheets
+(look into `examples/public/stylesheets` for sample stylesheets.
 
 ## Using with Rails
 
@@ -84,39 +103,27 @@ Check the Rack configuration:
 
     rake middleware
 
-More configuration options: see below.
-
-
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-Think about what you are doing, try to understand it, come up with a
-better solution, etc.
-*Is it Rack a cool feature?*
+Remember to include in the layout one of provided stylesheets
+(look into `examples/public/stylesheets` for sample stylesheets.
 
 
 ## Configuration options
 
-Markup your code with:
-
-    <pre><code>:::ruby
-    ...
-    </code></pre>
+Show one complete example for each supported hilighter.
 
 ## Quick Sinatra example
 
-Example (incomplete html, needs a layout file with link to css):
+Sinatra example:
 
     # file example.rb
 
     require 'rubygems'
     require 'sinatra'
 
-    gem 'coderay'
-    require 'coderay'
-    
-    gem 'wbzyl-rack-codehighlighter'
+    gem 'wbzyl-rack-codehighlighter', '>=0.2.0'
     require 'rack/codehighlighter'
     
-    use Rack::Codehighlighter, :coderay
+    use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
     
     get "/" do
       erb :hello
@@ -125,7 +132,7 @@ Example (incomplete html, needs a layout file with link to css):
     __END__
     
     @@ hello
-    ### Fibonacci numbers in Ruby
+    <h3>Fibonacci numbers in Ruby</h3>
     
     <pre><code>:::ruby
     def fib(n)
