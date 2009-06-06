@@ -141,6 +141,7 @@ In order to use include the following in a Rails application
 
     # get one of supported highlighters 
     require 'coderay'
+      
     require 'rack/codehighlighter'
     
     Rails::Initializer.run do |config|  
