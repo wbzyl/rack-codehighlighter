@@ -39,6 +39,12 @@ The above example could be shortened to:
 
 because the default values for options are used.
 
+**TODO**: The middleware should be backward compatible so that if a code
+block is encountered that does not define a language, the element is
+not changed (but attributes could be added).
+Currently the code which does not define a language is wrapped by
+`pre` tag.
+
 
 ## A simple example with inline template
 
