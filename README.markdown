@@ -41,9 +41,9 @@ because the default options values are used.
 
 Normalization: 
 
-* highlighted code is always wrapped with `pre` element
-  with attributes appropriate for codehighlighter used. (2
-* language names are taken from Ultraviolet
+* Highlighted code is always wrapped with `pre` element
+  with attributes appropriate for codehighlighter used.
+* Language names are taken from Ultraviolet.
 
 
 ## A simple example with inline template
