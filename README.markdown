@@ -46,81 +46,6 @@ Normalization:
 * Language names are taken from Ultraviolet.
 
 
-## A simple example with inline template
-
-    # example.rb
-
-    require 'rubygems'
-      
-    gem 'sinatra', '>=0.9.0'
-    require 'sinatra'
-
-    gem 'wbzyl-rack-codehighlighter', '>=0.2.0'
-    require 'rack/codehighlighter'
-    
-    use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
-    
-    get "/" do
-      erb :hello
-    end
-    
-    __END__
-    
-    @@ hello
-    <h3>Fibonacci numbers in Ruby</h3>
-    
-    <pre>:::ruby
-    def fib(n)
-      if n < 2
-        1
-      else
-        fib(n-2) + fib(n-1)
-      end
-    end
-    </pre>
-
-Run the above example with:
-
-    ruby example.rb
-
-The results are accessible from `http://localhost:4567`.
-
-
-## Why using middleware for code highlighting is awesome?
-
-In each piece of code inserted into html we must change:
-`<` to `&lt;`. This is annoying thing.
-Each(? prettify, dp-) pure javascript highlighter has this defect.
-
-In pre-Rack applications era possible approaches were:
-
-* gems;  conection to methods responsible for code highlighting
-  is obtrusive, i.e. via plugin + additional markup
-
-Analyze packages mentioned at the *The Ruby Toolbox* page:
-[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
-
-Links:
-
-    http://carboni.ca/projects/harsh/  
-      unless HAML is used
-    http://redclothcoderay.rubyforge.org/  
-    http://github.com/augustl/redcloth-with-coderay
-      how to use with Rails
-      does't degrade to html: new source tag
-    http://github.com/arya/tm_syntax_highlighting/
-      how to connect to rails/sinatra?
-
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-I can not tell you how much time I’ve wasted trying to add in some
-cool feature into rails. I would dig into the rails internals,
-override methods, do all kinds of tricky stuff. I thought I was
-awesome. A month later rails comes out with some cool new feature, I
-update rails and everything explodes.
-
-Conclusion: highlighting via plugins is doomed to explode sooner or later.
-
-
 ## Using with Rack application
 
 *Rack::Codehighlighter* can be used with any Rack application, for example with
@@ -202,6 +127,80 @@ To remove an extra nesting the `:markdown` option should be used:
 
     use Rack::Codehighlighter, :coderay, :markdown => true,
       :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+## A simple example with inline template
+
+    # example.rb
+
+    require 'rubygems'
+      
+    gem 'sinatra', '>=0.9.0'
+    require 'sinatra'
+
+    gem 'wbzyl-rack-codehighlighter', '>=0.2.0'
+    require 'rack/codehighlighter'
+    
+    use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
+    
+    get "/" do
+      erb :hello
+    end
+    
+    __END__
+    
+    @@ hello
+    <h3>Fibonacci numbers in Ruby</h3>
+    
+    <pre>:::ruby
+    def fib(n)
+      if n < 2
+        1
+      else
+        fib(n-2) + fib(n-1)
+      end
+    end
+    </pre>
+
+Run the above example with:
+
+    ruby example.rb
+
+The results are accessible from `http://localhost:4567`.
+
+
+## Why using middleware for code highlighting is awesome?
+
+In each piece of code inserted into html we must change:
+`<` to `&lt;`. This is annoying thing.
+Each(? prettify, dp-) pure javascript highlighter has this defect.
+
+In pre-Rack applications era possible approaches were:
+
+* gems;  conection to methods responsible for code highlighting
+  is obtrusive, i.e. via plugin + additional markup
+
+Analyze packages mentioned at the *The Ruby Toolbox* page:
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+
+Links:
+
+    http://carboni.ca/projects/harsh/  
+      unless HAML is used
+    http://redclothcoderay.rubyforge.org/  
+    http://github.com/augustl/redcloth-with-coderay
+      how to use with Rails
+      does't degrade to html: new source tag
+    http://github.com/arya/tm_syntax_highlighting/
+      how to connect to rails/sinatra?
+
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
+I can not tell you how much time I’ve wasted trying to add in some
+cool feature into rails. I would dig into the rails internals,
+override methods, do all kinds of tricky stuff. I thought I was
+awesome. A month later rails comes out with some cool new feature, I
+update rails and everything explodes.
+
+Conclusion: highlighting via plugins is doomed to explode sooner or later.
 
 
 ## Supported highlighters

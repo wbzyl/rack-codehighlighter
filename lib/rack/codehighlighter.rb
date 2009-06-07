@@ -10,13 +10,14 @@ module Rack
     
     FORMAT = %{%s - [%s] [%s] "%s %s%s %s" (%s) %d %d %0.4f\n}
     
-    def initialize(app, highlighter = :coderay, opts = {})
+    def initialize(app, highlighter = :censor, opts = {})
       @app = app
       @highlighter = highlighter
       @opts = {
         :element => "pre",
         :pattern => /\A:::(\w+)\s*\n/,
-        :reason => "[[--  ugly code removed  --]]"
+        :reason => "[[--  ugly code removed  --]]",
+        :markdown => false  
       }
       @opts.merge! opts
     end
