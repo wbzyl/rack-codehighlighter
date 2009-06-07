@@ -39,11 +39,11 @@ The above example could be shortened to:
 
 because the default values for options are used.
 
-**TODO**: The middleware should be backward compatible so that if a code
-block is encountered that does not define a language, the element is
-not changed (but attributes could be added).
-Currently the code which does not define a language is wrapped by
-`pre` tag.
+Normalization: 
+
+* highlighted code is always wrapped with `pre` element
+  with attributes appropriate for codehighlighter used. (2
+* language names are taken from Ultraviolet
 
 
 ## A simple example with inline template
@@ -166,10 +166,41 @@ Remember to include in the layout an appropriate stylesheet
 for sample stylesheets).
 
 
-## Configuration options
+## Configuration examples
 
-* Show one complete example for each supported highlighter..
-* List the default value of each option.
+Coderay:
+
+    use Rack::Codehighlighter, :coderay,
+      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+Ultraviolet:
+
+    use Rack::Codehighlighter, :ultraviolet, :theme => "dawn", :lines => false,
+      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+Prettify:
+
+    use Rack::Codehighlighter, :prettify,
+      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+Syntax:
+
+    use Rack::Codehighlighter, :syntax,
+      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+Censor:
+
+    use Rack::Codehighlighter, :censor, :reason => "[[--  ugly code removed  --]]",
+      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+
+In the above examples, the default value of each option is used.
+
+All highlighters use `pre` element to wrap highlighted code.
+In Markdown, Maruku and RDiscount templates code is wrapped with `pre>code`.
+To remove an extra nesting the `:markdown` option should be used:
+
+    use Rack::Codehighlighter, :coderay, :markdown => true
+      :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
 
 ## Supported highlighters

@@ -14,7 +14,7 @@ module Rack
       @app = app
       @highlighter = highlighter
       @opts = {
-        :element => "//pre",
+        :element => "pre",
         :pattern => /\A:::(\w+)\s*\n/,
         :reason => "[[--  ugly code removed  --]]"
       }
@@ -37,7 +37,7 @@ module Rack
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
-          if @opts[:remove_parent_element]
+          if @opts[:maruku]
             node.parent.swap(send(@highlighter, s))  
           else
             node.swap(send(@highlighter, s))            
@@ -76,7 +76,6 @@ module Rack
     end
     
     def censor(string)
-      # instead of pre the original/matched tag should be used
       "<pre class='censor'>#{@opts[:reason]}</pre>"
     end
 
@@ -92,9 +91,8 @@ module Rack
       if refs
         lang = refs[1]
         convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
-        convertor.convert(unescape_html(string.sub(/\A.*\n/, "")) || "[=this can'n happen=]")
+        convertor.convert(unescape_html(string.sub(@opts[:pattern], "")) || "[=this can'n happen=]")        
       else
-        # instead of pre the original/matched tag should be used
         "<pre>#{string}</pre>"
       end
     end
