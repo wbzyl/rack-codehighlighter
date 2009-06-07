@@ -7,7 +7,7 @@ a bunch of code highlighters to make their usage as generic possible.
 * coderay
 * syntax
 * prettify
-* censor
+* censor (a fake highlighter used in example below)
 
 Install the gem with:
 
