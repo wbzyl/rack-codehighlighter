@@ -14,13 +14,13 @@ Install the gem with:
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
 
-The middleware reads HTML produced by an application, where it looks
-for code blocks to highlight. Below we ask *coderay* to
-highlight all `pre` elements:
+The middleware looks for code blocks to be highlighted in HTML produced by
+application. For each block found it calls requested highlighter.
+Below we ask *coderay* to highlight all `pre` elements:
 
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-The middleware uses the pattern to learn what language the code block
+The middleware uses the *pattern* to learn what language the code block
 contains, for example
 
     <pre>:::ruby
