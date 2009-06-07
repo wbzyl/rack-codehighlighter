@@ -27,7 +27,7 @@ contains, for example
     puts "hello world"
     </pre>
 
-Plain description what the pattern says: 
+Plain description what the *pattern* says: 
 If the element contents begins with three colons, the text following
 the colons, up to the end of line, identifies the language. The text
 matched by the pattern is removed from the code block before
@@ -37,7 +37,7 @@ The above example could be shortened to:
 
     use Rack::Codehighlighter, :coderay
 
-because the default values for options are used.
+because the default options values are used.
 
 Normalization: 
 
