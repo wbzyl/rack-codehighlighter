@@ -199,7 +199,7 @@ All highlighters use `pre` element to wrap highlighted code.
 In Markdown, Maruku and RDiscount templates code is wrapped with `pre>code`.
 To remove an extra nesting the `:markdown` option should be used:
 
-    use Rack::Codehighlighter, :coderay, :markdown => true
+    use Rack::Codehighlighter, :coderay, :markdown => true,
       :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
 
