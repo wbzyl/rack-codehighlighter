@@ -88,9 +88,12 @@ The results are accessible from `http://localhost:4567`.
 
 ## Why using middleware for code highlighting is awesome?
 
+In each piece of code inserted into html we must change:
+`<` to `&lt;`. This is annoying thing.
+Each(? prettify, dp-) pure javascript highlighter has this defect.
+
 In pre-Rack applications era possible approaches were:
 
-* pure javascript; cons code must be html-escaped
 * gems;  conection to methods responsible for code highlighting
   is obtrusive, i.e. via plugin + additional markup
 
