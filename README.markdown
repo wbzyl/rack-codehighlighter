@@ -125,8 +125,7 @@ a **Sinatra** application. If your application includes a rackup file or
 uses *Rack::Builder* to construct the application pipeline, simply
 require and use as follows:
 
-    # get one of supported highlighters 
-    gem 'coderay'
+    gem 'coderay' # get one of supported highlighters 
     require 'coderay'
      
     gem 'wbzyl-rack-codehighlighter'
@@ -145,8 +144,7 @@ for sample stylesheets).
 In order to use include the following in a Rails application
 `config/environment.rb` file:
 
-    # get one of supported highlighters 
-    require 'coderay'
+    require 'coderay' # get one of supported highlighters 
       
     require 'rack/codehighlighter'
     
