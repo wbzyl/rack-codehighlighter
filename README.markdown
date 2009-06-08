@@ -180,18 +180,13 @@ Currently, almost everything what I write is rendered
 by Ruby on Rails and Sinatra applications.
 To improve the readability of the text,
 I want the code fragments to be colored.
-
 So extending Rails and Sinatra frameworks with syntax
-highlighting seems the best way to go.
+highlighting is a must.
 
-The problem is to how to hook up syntax highlighting feature 
-into these frameworks. Different solutions for each one
-framework are needed. This is the current practice.
+The problem is to how syntax highlighting features 
+are hooked into these frameworks. 
 
-With Rack based application we can add to the application pipeline.
-One solution suffices.
-
-Look at the current practice. Analyze the top three tools
+Look at the current practice. To this end, analyze the top three tools
 listed on *The Ruby Toolbox* in category 
 [Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html).
 
@@ -210,6 +205,11 @@ listed on *The Ruby Toolbox* in category
     <source:ruby> some_ruby_code </source> 
 
 Overdone: highlighting engine/library/framework.
+Different solutions for each one framework are needed.
+Different output: include.
+
+With Rack based application we can simplifiy thingst by adding to the
+application pipeline..
 
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 I can not tell you how much time I’ve wasted trying to add in some
