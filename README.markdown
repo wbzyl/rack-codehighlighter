@@ -193,15 +193,15 @@ framework are needed. This is the current practice.
 With Rack based application we can add to the application pipeline.
 One solution suffices.
 
-Current practice is to use helper method which provide
+Look at the current practice. Analyze the top three tools
+listed on *The Ruby Toolbox* in category 
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html).
 
-How to provide a connection between Rails/Sinatra app and highlighter?
-
-Plugin [tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/):
+[tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/) (plugin):
 
     code(some_ruby_code, :theme => "twilight", :lang => "ruby", :line_numbers => true)
 
-Plugin [harsh](http://carboni.ca/projects/harsh/) (see also the HAML example):
+[harsh](http://carboni.ca/projects/harsh/) (plugin):
 
     <% harsh :theme => :dawn do %>
       some_ruby_code
@@ -209,10 +209,11 @@ Plugin [harsh](http://carboni.ca/projects/harsh/) (see also the HAML example):
       
     <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
 
-Gem [Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay)
+[Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay) (gem):
 
     <source:ruby> some_ruby_code </source> 
 
+Overdone.
 
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 I can not tell you how much time I’ve wasted trying to add in some
