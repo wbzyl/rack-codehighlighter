@@ -176,24 +176,22 @@ The results are accessible from `http://localhost:4567`.
 
 ## Why I use middleware for syntax highlighting
 
-Most of the time, I write text in Rails/Sinatra.
+Words, words, words:  highlighting engine/library/framework 
 
-So extending those rendering engines with syntax
+Currently, almost everything what I write is rendered 
+by Ruby on Rails and Sinatra applications.
+To improve the readability of the text,
+I want the code fragments to be colored.
+
+So extending Rails and Sinatra frameworks with syntax
 highlighting seems the best way to go.
 
-The problem is to how to hook up
-To add syntax highlighting feature to Rails, Sinatra?
+The problem is to how to hook up syntax highlighting feature 
+into these frameworks. Different solutions for each one
+framework are needed. This is the current practice.
 
-With Rack based application. we can add to the application pipeline.
-
-
-To include colored source code in your web pages produced by Rails,
-Sinatra or other Rack application
-
-To do  syntax highlighting: put your code in, and you get it back colored
-
-  highlighting engine/library/framework 
-  connection 
+With Rack based application we can add to the application pipeline.
+One solution suffices.
 
 Current practice is to use helper method which provide
 
