@@ -188,16 +188,24 @@ In pre-Rack applications era possible approaches were:
 Analyze packages mentioned at the *The Ruby Toolbox* page:
 [Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
 
-Links:
+How to provide a connection between Rails/Sinatra app and highlighter?
 
-    http://carboni.ca/projects/harsh/  
-      unless HAML is used
-    http://redclothcoderay.rubyforge.org/  
-    http://github.com/augustl/redcloth-with-coderay
-      how to use with Rails
-      does't degrade to html: new source tag
-    http://github.com/arya/tm_syntax_highlighting/
-      how to connect to rails/sinatra?
+Plugin [tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/):
+
+    code(some_ruby_code, :theme => "twilight", :lang => "ruby", :line_numbers => true)
+
+Plugin [harsh](http://carboni.ca/projects/harsh/) (see also the HAML example):
+
+    <% harsh :theme => :dawn do %>
+      some_ruby_code
+    <% end %>
+      
+    <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
+
+Gem [Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay)
+
+    <source:ruby> some_ruby_code </source> 
+
 
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 I can not tell you how much time I’ve wasted trying to add in some
