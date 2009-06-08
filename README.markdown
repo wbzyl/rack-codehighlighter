@@ -53,9 +53,10 @@ a **Sinatra** application. If your application includes a rackup file or
 uses *Rack::Builder* to construct the application pipeline, simply
 require and use as follows:
 
-    gem 'coderay' # get one of supported highlighters 
-    require 'coderay'
-     
+    gem 'coderay' ; require 'coderay'  # get one of supported highlighters 
+    gem 'ultraviolet' ; require 'uv'
+    gem 'syntax' ; require 'syntax/convertors/html'
+           
     gem 'wbzyl-rack-codehighlighter'
     require 'rack/codehighlighter'
      
@@ -72,12 +73,17 @@ for sample stylesheets).
 In order to use include the following in a Rails application
 `config/environment.rb` file:
 
-    require 'coderay' # get one of supported highlighters 
+    require 'coderay'  # get one of supported highlighters 
+    require 'uv'
+    require 'syntax/convertors/html'
       
     require 'rack/codehighlighter'
     
     Rails::Initializer.run do |config|  
       config.gem 'coderay'
+      config.gem 'ultraviolet'
+      config.gem 'syntax'
+      
       config.gem 'wbzyl-rack-codehighlighter'
         
       config.middleware.use Rack::Codehighlighter, :coderay
