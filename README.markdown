@@ -203,11 +203,9 @@ listed on *The Ruby Toolbox* in category
 
 [harsh](http://carboni.ca/projects/harsh/) (plugin):
 
-    <% harsh :theme => :dawn do %>
-      some_ruby_code
-    <% end %>
-      
-    <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
+    <% harsh :theme => :dawn do %>    |    <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
+      some_ruby_code                  |
+    <% end %>                         |
 
 [Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay) (gem):
 
