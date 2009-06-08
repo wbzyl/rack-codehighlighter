@@ -174,19 +174,28 @@ Run the above example with:
 The results are accessible from `http://localhost:4567`.
 
 
-## Why using middleware for code highlighting is awesome?
+## Why I use middleware for syntax highlighting
 
-In each piece of code inserted into html we must change:
-`<` to `&lt;`. This is annoying thing.
-Each(? prettify, dp-) pure javascript highlighter has this defect.
+Most of the time, I write text in Rails/Sinatra.
 
-In pre-Rack applications era possible approaches were:
+So extending those rendering engines with syntax
+highlighting seems the best way to go.
 
-* gems;  conection to methods responsible for code highlighting
-  is obtrusive, i.e. via plugin + additional markup
+The problem is to how to hook up
+To add syntax highlighting feature to Rails, Sinatra?
 
-Analyze packages mentioned at the *The Ruby Toolbox* page:
-[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+With Rack based application. we can add to the application pipeline.
+
+
+To include colored source code in your web pages produced by Rails,
+Sinatra or other Rack application
+
+To do  syntax highlighting: put your code in, and you get it back colored
+
+  highlighting engine/library/framework 
+  connection 
+
+Current practice is to use helper method which provide
 
 How to provide a connection between Rails/Sinatra app and highlighter?
 
@@ -215,6 +224,25 @@ awesome. A month later rails comes out with some cool new feature, I
 update rails and everything explodes.
 
 Conclusion: highlighting via plugins is doomed to explode sooner or later.
+
+
+*Rack::Codehighlighter* provides a thin wrapper over 
+a bunch of code highlighters to make their usage as generic possible.
+
+Uniform/define own..
+
+In each piece of code inserted into html we must change:
+`<` to `&lt;`. This is annoying thing.
+Each(? prettify, dp-) pure javascript highlighter has this defect.
+
+In pre-Rack applications era possible approaches were:
+
+* gems;  conection to methods responsible for code highlighting
+  is obtrusive, i.e. via plugin + additional markup
+
+Analyze packages mentioned at the *The Ruby Toolbox* page:
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+
 
 
 ## Supported highlighters
