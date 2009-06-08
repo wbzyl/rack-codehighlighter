@@ -176,8 +176,6 @@ The results are accessible from `http://localhost:4567`.
 
 ## Why I use middleware for syntax highlighting
 
-Words, words, words:  highlighting engine/library/framework 
-
 Currently, almost everything what I write is rendered 
 by Ruby on Rails and Sinatra applications.
 To improve the readability of the text,
@@ -211,7 +209,7 @@ listed on *The Ruby Toolbox* in category
 
     <source:ruby> some_ruby_code </source> 
 
-Overdone.
+Overdone: highlighting engine/library/framework.
 
 [*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
 I can not tell you how much time I’ve wasted trying to add in some
