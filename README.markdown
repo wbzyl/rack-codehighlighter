@@ -74,11 +74,11 @@ For example:
     puts "hello world"
     </pre>
 
-(Informal description of the *pattern*: if the element contents begins
+Informal description of the *pattern*: if the element contents begins
 with three colons, the text following the colons, up to the end of
-line, identifies the language.)
-
-Remark: language names are taken from the *ultraviolet* gem.
+line, identifies the language.
+Language names are taken from the *ultraviolet* gem,
+see bellow for the list.
 
 Next, the text matched by the pattern is removed from the code block,
 the matched element is removed, and code block is passed to *coderay*
