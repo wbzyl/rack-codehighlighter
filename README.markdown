@@ -84,9 +84,9 @@ Next, the text matched by the pattern is removed from the code block,
 the matched element is removed, and code block is passed to *coderay*
 highlighter for processing. 
 
-Highlighted code returned by the *coderay* highlighter is wrapped with
-`pre` element with attributes appropriate for the codehighlighter
-used.
+Finally, the highlighted code returned by the *coderay* highlighter is
+wrapped with `pre` element with attributes appropriate for the
+codehighlighter used.
 
 ### More examples
 
