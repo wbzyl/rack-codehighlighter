@@ -58,14 +58,14 @@ application pipeline, simply require and use as follows:
     run app
 
 
-## *Rack::Codehighlighter* by example
+## *Rack::Codehighlighter* by an example
 
-Below we ask *coderay* to highlight all `pre` elements:
+Below we ask *Rack::Codehighlighter* to look for code blocks into all
+`pre` *element*s:
 
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-*Rack::Codehighlighter* looks for code block into `pre` *element*s
-and uses the `/\A:::(\w+)\s*\n/` *pattern* to learn what language 
+and use the `/\A:::(\w+)\s*\n/` *pattern* to learn what language 
 the code block contains. 
 
 For example:
@@ -74,17 +74,19 @@ For example:
     puts "hello world"
     </pre>
 
-If the element contents begins with three colons, the text following
-the colons, up to the end of line, identifies the language. The text
-matched by the pattern is removed from the code block before
-processing.
+(Informal description of the *pattern*: if the element contents begins
+with three colons, the text following the colons, up to the end of
+line, identifies the language.)
 
-Normalization: 
+Remark: language names are taken from the *ultraviolet* gem.
 
-* Highlighted code is always wrapped with `pre` element
-  with attributes appropriate for codehighlighter used.
-* All language names are taken from the *ultraviolet* gem.
+Next, the text matched by the pattern is removed from the code block,
+the matched element is removed, and code block is passed to *coderay*
+highlighter for processing. 
 
+Highlighted code returned by the *coderay* highlighter is wrapped with
+`pre` element with attributes appropriate for the codehighlighter
+used.
 
 ### More examples
 
@@ -115,9 +117,9 @@ Censor:
     use Rack::Codehighlighter, :censor, :reason => "[[--  ugly code removed  --]]",
       :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
-All highlighters use `pre` element to wrap highlighted code.
-In Markdown, Maruku and RDiscount templates code is wrapped with `pre>code`.
-To remove an extra nesting the `:markdown` option should be used:
+
+In Markdown, Maruku and RDiscount templates, code is wrapped with `pre>code`.
+To remove extra one level of nesting the `:markdown` option should be used:
 
     use Rack::Codehighlighter, :coderay, :markdown => true,
       :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
@@ -247,17 +249,15 @@ Ultraviolet supports almost any language:
 * yaml, yui\_javascript
 
 
-## Why?
+## Why? TODO
 
-Currently, almost everything what I write is rendered 
-by Ruby on Rails and Sinatra applications.
-To improve the readability of the text,
-I want the code fragments to be colored.
-So extending Rails and Sinatra frameworks with syntax
-highlighting is a must.
+Currently, almost everything what I write is rendered by Ruby on Rails
+and Sinatra applications. To improve the readability of the text, I
+want the code fragments to be colored. So extending Rails and Sinatra
+frameworks with syntax highlighting is a must.
 
-The problem is to how syntax highlighting features 
-are hooked into these frameworks. 
+The problem is to how syntax highlighting features are hooked into
+these frameworks.
 
 Look at the current practice. To this end, analyze the top three tools
 listed on *The Ruby Toolbox* in category 
