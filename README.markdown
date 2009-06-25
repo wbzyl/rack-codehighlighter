@@ -1,18 +1,59 @@
 # Rack::Codehighlighter middleware
 
-*Rack::Codehighlighter* provides a thin wrapper over 
-a bunch of code highlighters to make their usage as generic possible.
+## What?
+
+The *rack-codehighlighter* gem provides a thin wrapper over 
+a bunch of code highlighters to make their usage as generic possible:
 
 * ultraviolet
 * coderay
 * syntax
 * prettify
-* censor (a fake highlighter used in example below)
+* censor (a fake highlighter used in the example below)
+
+## Installing *rack-codehighlighter* gem
 
 Install the gem with:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
+### Using *rack-codehighlighter* with a Rack application
+
+*Rack::Codehighlighter* can be used with any Rack application, for example with
+a **Sinatra** application. If your application includes a rackup file or
+uses *Rack::Builder* to construct the application pipeline, simply
+require and use as follows:
+
+    gem 'coderay'       # get one of supported highlighters 
+    require 'coderay'   
+           
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
+     
+    use Rack::Codehighlighter, :coderay
+    run app
+
+### Using *rack-codehighlighter* with a Rails application
+
+In order to use include the following in a Rails application
+`config/environment.rb` file:
+
+    require 'coderay'               # get one of supported highlighters 
+    require 'rack/codehighlighter'
+    
+    Rails::Initializer.run do |config|  
+      config.gem 'coderay'
+      config.gem 'wbzyl-rack-codehighlighter'
+        
+      config.middleware.use Rack::Codehighlighter, :coderay
+    end  
+
+Optionally, check the Rack configuration running the following command:
+
+    rake middleware
+
+
+## How it works?
 
 The middleware looks for code blocks to be highlighted in HTML produced by
 application. For each block found it calls requested highlighter.
@@ -45,60 +86,9 @@ Normalization:
   with attributes appropriate for codehighlighter used.
 * Language names are taken from Ultraviolet.
 
+### Examples
 
-## Using with Rack application
-
-*Rack::Codehighlighter* can be used with any Rack application, for example with
-a **Sinatra** application. If your application includes a rackup file or
-uses *Rack::Builder* to construct the application pipeline, simply
-require and use as follows:
-
-    gem 'coderay' ; require 'coderay'  # get one of supported highlighters 
-    gem 'ultraviolet' ; require 'uv'
-    gem 'syntax' ; require 'syntax/convertors/html'
-           
-    gem 'wbzyl-rack-codehighlighter'
-    require 'rack/codehighlighter'
-     
-    use Rack::Codehighlighter, :coderay
-    run app
-
-Remember to include in the layout an appropriate stylesheet 
-(look into `examples/public/stylesheets` directory 
-for sample stylesheets).
-
-
-## Using with Rails
-
-In order to use include the following in a Rails application
-`config/environment.rb` file:
-
-    require 'coderay'  # get one of supported highlighters 
-    require 'uv'
-    require 'syntax/convertors/html'
-      
-    require 'rack/codehighlighter'
-    
-    Rails::Initializer.run do |config|  
-      config.gem 'coderay'
-      config.gem 'ultraviolet'
-      config.gem 'syntax'
-      
-      config.gem 'wbzyl-rack-codehighlighter'
-        
-      config.middleware.use Rack::Codehighlighter, :coderay
-    end  
-
-Check the Rack configuration:
-
-    rake middleware
-
-Remember to include in the layout an appropriate stylesheet 
-(look into `examples/public/stylesheets` directory 
-for sample stylesheets).
-
-
-## Configuration examples
+In examples displayed below, the default value of each option is used.
 
 Coderay:
 
@@ -125,8 +115,6 @@ Censor:
     use Rack::Codehighlighter, :censor, :reason => "[[--  ugly code removed  --]]",
       :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
-In the above examples, the default value of each option is used.
-
 All highlighters use `pre` element to wrap highlighted code.
 In Markdown, Maruku and RDiscount templates code is wrapped with `pre>code`.
 To remove an extra nesting the `:markdown` option should be used:
@@ -134,15 +122,17 @@ To remove an extra nesting the `:markdown` option should be used:
     use Rack::Codehighlighter, :coderay, :markdown => true,
       :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
-## A simple example with inline template
+Check the `examples` directory for working examples.
+
+## Try it!
+
+Simple Copy & Paste example. Implemented in Sinatra and uses inline template.
 
     # example.rb
 
     require 'rubygems'
-      
-    gem 'sinatra', '>=0.9.0'
+    gem 'sinatra', '>=0.9.0' 
     require 'sinatra'
-
     gem 'wbzyl-rack-codehighlighter', '>=0.2.0'
     require 'rack/codehighlighter'
     
@@ -153,10 +143,8 @@ To remove an extra nesting the `:markdown` option should be used:
     end
     
     __END__
-    
     @@ hello
     <h3>Fibonacci numbers in Ruby</h3>
-    
     <pre>:::ruby
     def fib(n)
       if n < 2
@@ -167,77 +155,11 @@ To remove an extra nesting the `:markdown` option should be used:
     end
     </pre>
 
-Run the above example with:
+Run the example with:
 
     ruby example.rb
 
 The results are accessible from `http://localhost:4567`.
-
-
-## Why I use middleware for syntax highlighting
-
-Currently, almost everything what I write is rendered 
-by Ruby on Rails and Sinatra applications.
-To improve the readability of the text,
-I want the code fragments to be colored.
-So extending Rails and Sinatra frameworks with syntax
-highlighting is a must.
-
-The problem is to how syntax highlighting features 
-are hooked into these frameworks. 
-
-Look at the current practice. To this end, analyze the top three tools
-listed on *The Ruby Toolbox* in category 
-[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html).
-
-[tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/) (plugin):
-
-    code(some_ruby_code, :theme => "twilight", :lang => "ruby", :line_numbers => true)
-
-[harsh](http://carboni.ca/projects/harsh/) (plugin):
-
-    <% harsh :theme => :dawn do %>    |    <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
-      some_ruby_code                  |
-    <% end %>                         |
-
-[Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay) (gem):
-
-    <source:ruby> some_ruby_code </source> 
-
-Overdone: highlighting engine/library/framework.
-Different solutions for each one framework are needed.
-Different output: include.
-
-With Rack based application we can simplifiy thingst by adding to the
-application pipeline..
-
-[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
-I can not tell you how much time I’ve wasted trying to add in some
-cool feature into rails. I would dig into the rails internals,
-override methods, do all kinds of tricky stuff. I thought I was
-awesome. A month later rails comes out with some cool new feature, I
-update rails and everything explodes.
-
-Conclusion: highlighting via plugins is doomed to explode sooner or later.
-
-
-*Rack::Codehighlighter* provides a thin wrapper over 
-a bunch of code highlighters to make their usage as generic possible.
-
-Uniform/define own..
-
-In each piece of code inserted into html we must change:
-`<` to `&lt;`. This is annoying thing.
-Each(? prettify, dp-) pure javascript highlighter has this defect.
-
-In pre-Rack applications era possible approaches were:
-
-* gems;  conection to methods responsible for code highlighting
-  is obtrusive, i.e. via plugin + additional markup
-
-Analyze packages mentioned at the *The Ruby Toolbox* page:
-[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
-
 
 
 ## Supported highlighters
@@ -245,14 +167,12 @@ Analyze packages mentioned at the *The Ruby Toolbox* page:
 These currently include: *Syntax* (fast), *Coderay* (very fast), 
 *Ultraviolet* (slow, but highlights almost any language).
 
-
 ### [Syntax](http://syntax.rubyforge.org/)
 
 Languages supported by *Syntax*: 
 
 * xml
 * ruby
-
 
 ### [Coderay](http://coderay.rubychan.de/)
 
@@ -325,3 +245,68 @@ Ultraviolet supports almost any language:
 * vectorscript
 * xhtml\_1.0, xml, xml\_strict, xsl
 * yaml, yui\_javascript
+
+
+## Why?
+
+Currently, almost everything what I write is rendered 
+by Ruby on Rails and Sinatra applications.
+To improve the readability of the text,
+I want the code fragments to be colored.
+So extending Rails and Sinatra frameworks with syntax
+highlighting is a must.
+
+The problem is to how syntax highlighting features 
+are hooked into these frameworks. 
+
+Look at the current practice. To this end, analyze the top three tools
+listed on *The Ruby Toolbox* in category 
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html).
+
+[tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/) (plugin):
+
+    code(some_ruby_code, :theme => "twilight", :lang => "ruby", :line_numbers => true)
+
+[harsh](http://carboni.ca/projects/harsh/) (plugin):
+
+    <% harsh :theme => :dawn do %>    |    <% harsh %Q{ some_ruby_code }, :theme => :dawn %>
+      some_ruby_code                  |
+    <% end %>                         |
+
+[Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay) (gem):
+
+    <source:ruby> some_ruby_code </source> 
+
+Overdone: highlighting engine/library/framework.
+Different solutions for each one framework are needed.
+Different output: include.
+
+With Rack based application we can simplifiy thingst by adding to the
+application pipeline..
+
+[*Ruby tips from me, your idol*](http://www.binarylogic.com/2009/04/19/ruby-tips-from-me-your-idol):
+I can not tell you how much time I’ve wasted trying to add in some
+cool feature into rails. I would dig into the rails internals,
+override methods, do all kinds of tricky stuff. I thought I was
+awesome. A month later rails comes out with some cool new feature, I
+update rails and everything explodes.
+
+Conclusion: highlighting via plugins is doomed to explode sooner or later.
+
+
+*Rack::Codehighlighter* provides a thin wrapper over 
+a bunch of code highlighters to make their usage as generic possible.
+
+Uniform/define own..
+
+In each piece of code inserted into html we must change:
+`<` to `&lt;`. This is annoying thing.
+Each(? prettify, dp-) pure javascript highlighter has this defect.
+
+In pre-Rack applications era possible approaches were:
+
+* gems;  conection to methods responsible for code highlighting
+  is obtrusive, i.e. via plugin + additional markup
+
+Analyze packages mentioned at the *The Ruby Toolbox* page:
+[Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
