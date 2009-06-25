@@ -203,10 +203,10 @@ The *ultraviolet* gem needs oniguruma regexp library.
 
 On Fedora install the library with:
 
-    sudo yum install oniguruma
+    sudo yum install oniguruma oniguruma-devel
 
-For installation instruction from sources, see
-[Carbonica](http://carboni.ca/projects/harsh/)
+For installation instruction of the *oniguruma* library from sources,
+see [Carbonica](http://carboni.ca/projects/harsh/)
 
 Now, install the gem:
 
