@@ -118,8 +118,9 @@ Censor:
       :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
 
 
-In Markdown, Maruku and RDiscount templates, code is wrapped with `pre>code`.
-To remove extra one level of nesting the `:markdown` option should be used:
+In Markdown, Maruku and RDiscount templates, after converting to HTML,
+code is wrapped with `pre>code`.  To remove this extra one level of
+nesting the `:markdown` option should be used:
 
     use Rack::Codehighlighter, :coderay, :markdown => true,
       :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
