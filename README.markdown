@@ -15,7 +15,7 @@ a bunch of code highlighters to make their usage as generic possible:
 
 ## How it works?
 
-The middleware looks for code blocks to be highlighted in the HTML
+*Rack::Codehighlighter* looks for code blocks to be highlighted in the HTML
 produced by your application. For each block found it calls requested
 highlighter.
 
