@@ -1,5 +1,6 @@
 # Rack::Codehighlighter middleware
 
+
 ## What?
 
 The *rack-codehighlighter* gem provides a thin wrapper over 
@@ -11,31 +12,23 @@ a bunch of code highlighters to make their usage as generic possible:
 * prettify
 * censor (a fake highlighter used in the example below)
 
-## Installing *rack-codehighlighter* gem
+
+## How it works?
+
+The middleware looks for code blocks to be highlighted in the HTML
+produced by your application. For each block found it calls requested
+highlighter.
+
+
+## Installing and Usage
 
 Install the gem with:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
-### Using *rack-codehighlighter* with a Rack application
-
-*Rack::Codehighlighter* can be used with any Rack application, for example with
-a **Sinatra** application. If your application includes a rackup file or
-uses *Rack::Builder* to construct the application pipeline, simply
-require and use as follows:
-
-    gem 'coderay'       # get one of supported highlighters 
-    require 'coderay'   
-           
-    gem 'wbzyl-rack-codehighlighter'
-    require 'rack/codehighlighter'
-     
-    use Rack::Codehighlighter, :coderay
-    run app
-
 ### Using *rack-codehighlighter* with a Rails application
 
-In order to use include the following in a Rails application
+In order to use, include the following code in a Rails application
 `config/environment.rb` file:
 
     require 'coderay'               # get one of supported highlighters 
@@ -48,45 +41,52 @@ In order to use include the following in a Rails application
       config.middleware.use Rack::Codehighlighter, :coderay
     end  
 
-Optionally, check the Rack configuration running the following command:
+### Using *rack-codehighlighter* with a Rack application
 
-    rake middleware
+The *rack-codehighlighter* gem can be used with any Rack application,
+for example with a **Sinatra** application. If your application
+includes a rackup file or uses *Rack::Builder* to construct the
+application pipeline, simply require and use as follows:
+
+    gem 'coderay'       # get one of supported highlighters 
+    require 'coderay'   
+           
+    gem 'wbzyl-rack-codehighlighter'
+    require 'rack/codehighlighter'
+     
+    use Rack::Codehighlighter, :coderay
+    run app
 
 
-## How it works?
+## *Rack::Codehighlighter* by example
 
-The middleware looks for code blocks to be highlighted in HTML produced by
-application. For each block found it calls requested highlighter.
 Below we ask *coderay* to highlight all `pre` elements:
 
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-The middleware uses the *pattern* to learn what language the code block
-contains, for example
+*Rack::Codehighlighter* looks for code block into `pre` *element*s
+and uses the `/\A:::(\w+)\s*\n/` *pattern* to learn what language 
+the code block contains. 
+
+For example:
 
     <pre>:::ruby
     puts "hello world"
     </pre>
 
-Plain description what the *pattern* says: 
 If the element contents begins with three colons, the text following
 the colons, up to the end of line, identifies the language. The text
 matched by the pattern is removed from the code block before
 processing.
 
-The above example could be shortened to:
-
-    use Rack::Codehighlighter, :coderay
-
-because the default options values are used.
-
 Normalization: 
 
 * Highlighted code is always wrapped with `pre` element
   with attributes appropriate for codehighlighter used.
-* Language names are taken from Ultraviolet.
+* All language names are taken from the *ultraviolet* gem.
 
-### Examples
+
+### More examples
 
 In examples displayed below, the default value of each option is used.
 
@@ -305,7 +305,7 @@ Each(? prettify, dp-) pure javascript highlighter has this defect.
 
 In pre-Rack applications era possible approaches were:
 
-* gems;  conection to methods responsible for code highlighting
+* gems;  connection to methods responsible for code highlighting
   is obtrusive, i.e. via plugin + additional markup
 
 Analyze packages mentioned at the *The Ruby Toolbox* page:
