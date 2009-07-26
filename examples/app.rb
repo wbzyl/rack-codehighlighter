@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-path = File.join(File.expand_path(File.dirname(__FILE__)), "..", "lib")
+path = File.expand_path("../lib")
 $:.unshift(path) unless $:.include?(path)
 
 require 'rubygems'
