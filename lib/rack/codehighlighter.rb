@@ -1,7 +1,4 @@
-gem 'rack'
 require 'rack/utils'
-
-gem 'hpricot', '>=0.8.1'
 require 'hpricot'
 
 module Rack

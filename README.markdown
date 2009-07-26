@@ -38,7 +38,7 @@ In order to use, include the following code in a Rails application
       config.gem 'coderay'
       config.gem 'wbzyl-rack-codehighlighter'
         
-      config.middleware.use Rack::Codehighlighter, :coderay
+      config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     end  
 
 ### Using *rack-codehighlighter* with a Rack application
@@ -54,7 +54,7 @@ application pipeline, simply require and use as follows:
     gem 'wbzyl-rack-codehighlighter'
     require 'rack/codehighlighter'
      
-    use Rack::Codehighlighter, :coderay
+    use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     run app
 
 
@@ -75,16 +75,16 @@ For example:
     </pre>
 
 Informal description of the *pattern*: if the element contents begins
-with three colons, the text following the colons, up to the end of
-line, identifies the language.
-Language names are taken from the *ultraviolet* gem,
-see bellow for the list.
+with three colons, word characters following these colons up to
+optional spaces followed by end of line, name the language.  
 
-Next, the text matched by the pattern is removed from the code block,
-the matched element is removed, and code block is passed to *coderay*
+Language names are taken from the *ultraviolet* gem, see below for
+the list.
+
+The matched element is removed, and the code block is passed to *coderay*
 highlighter for processing. 
 
-Finally, the highlighted code returned by the *coderay* highlighter is
+The highlighted code returned by the *coderay* highlighter is
 wrapped with `pre` element with attributes appropriate for the
 codehighlighter used.
 
