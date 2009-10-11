@@ -13,3 +13,44 @@
       "java", "js", "m", "mxml", "perl", "pl", "pm", "py", "rb", "sh",
       "xhtml", "xml", "xsl".
       </pre>
+
+[10.10.2009, contest entry] http://coderack.org/
+
+About
+
+The *rack-codehighlighter* eases the pain with 
+connecting to and switching between code higlighters.
+The code below implements: *Coderay*, *Syntax* and *Ultraviolet*. 
+Other higlighters could be easily added.
+
+Usage
+
+Install the *wbzyl-rack-codehighlighter* gem from the *http://github.com*,
+add *Rack::Codehighlighter* to application pipeline, require and use. 
+
+For example, in a Rails application, open *config/environment.rb* file
+and add the following code:
+
+    require 'coderay'               # get one of supported highlighters 
+    require 'rack/codehighlighter'
+    
+    Rails::Initializer.run do |config|  
+      config.gem 'coderay'
+      config.gem 'wbzyl-rack-codehighlighter'
+      
+      config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
+    end  
+
+From now, *Rack::Codehighlighter* looks for code blocks to be
+highlighted in the HTML produced by your application. 
+
+It calls *Coderay* highlighter for each *pre* element it finds and
+and use the /\A:::(\w+)\s*\n/ pattern to learn what language the code block contains.
+For example, in the code below we tell *coderay* to use *Ruby*:
+
+    <pre>:::ruby
+    printf "hello world"
+    </pre>
+
+
+Code
