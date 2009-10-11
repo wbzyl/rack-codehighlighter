@@ -18,40 +18,33 @@
 
 About
 
-The *rack-codehighlighter* eases the pain with 
-connecting to and switching between code higlighters.
-The code below implements: *Coderay*, *Syntax* and *Ultraviolet*. 
-Other higlighters could be easily added.
+The *rack-codehighlighter* allows for easy connecting to and switching
+between code highlighters.
+
 
 Usage
 
-Install the *wbzyl-rack-codehighlighter* gem from the *http://github.com*,
-add *Rack::Codehighlighter* to application pipeline, install one of provided
-stylesheets, require and use. 
+For example, to colorize code with well known *coderay* highlighter use
+the following:
 
-For example, in a Rails application, open *config/environment.rb* file
-and add the following code:
+    require 'coderay'
+    use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
-    require 'coderay'               # get one of supported highlighters 
-    require 'rack/codehighlighter'
-    
-    Rails::Initializer.run do |config|  
-      config.gem 'coderay'
-      config.gem 'wbzyl-rack-codehighlighter'
-      
-      config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
-    end  
+From now, HTML pages produced by your application will be
+searched by *Rack::Codehighlighter* for code blocks to be highlighted. 
 
-From now, *Rack::Codehighlighter* looks for code blocks to be
-highlighted in the HTML produced by your application. 
-
-It calls *Coderay* highlighter for each *pre* element it finds and
-and use the /\A:::(\w+)\s*\n/ pattern to learn what language the code block contains.
-For example, in the code below we tell *coderay* to use *Ruby*:
+For each found *pre* element, the pattern /\A:::(\w+)\s*\n/ 
+will be used to extract the language name. For example, 
+from the *pre* element below the *ruby* name will be extracted:
 
     <pre>:::ruby
     printf "hello world"
     </pre>
 
+The code below implements the most popular Ruby code highlighters:
+*coderay*, *syntax* and *ultraviolet*. 
+
 
 Code
+
+[tutaj będzie kod z Rack::Codehighlighter]
