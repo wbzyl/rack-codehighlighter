@@ -26,7 +26,8 @@ Other higlighters could be easily added.
 Usage
 
 Install the *wbzyl-rack-codehighlighter* gem from the *http://github.com*,
-add *Rack::Codehighlighter* to application pipeline, require and use. 
+add *Rack::Codehighlighter* to application pipeline, install one of provided
+stylesheets, require and use. 
 
 For example, in a Rails application, open *config/environment.rb* file
 and add the following code:
