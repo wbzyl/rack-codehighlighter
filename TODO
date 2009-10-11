@@ -18,12 +18,11 @@
 
 About
 
-The *Rack::Codehighlighter* allows for easy connecting to 
-and switching between code highlighters.
-It searches HTML pages produced 
-by your application for html elements described
-by parameter and a name of code highlighter to be used 
-is also passed as a parameter.
+The *Rack::Codehighlighter* is a middleware which
+allows for easy connecting a code highlighter of somebody's choice
+to an HTML page containing pieces of programming code.
+Parameters to *Rack::Codehighlighter* are: the name of a highlighter
+and a specification of how to find the pieces of code in the page.
 
 
 Usage
@@ -36,17 +35,19 @@ For example, to colorize code in *pre* elements with well known
       :coderay, :element => "pre", 
       :pattern => /\A:::(\w+)\s*\n/
 
-The pattern /\A:::(\w+)\s*\n/ will be used to extract the language name
-from the element contents. For example, from the *pre* element below 
-the *ruby* name will be extracted:
+The first parenthesized expression from the pattern /\A:::(\w+)\s*\n/ 
+will be used to match the language name. 
+For example, from the *pre* element below the *ruby* name 
+will be extracted
 
     <pre>:::ruby
     printf "hello world"
     </pre>
 
-The code below implements three most popular Ruby code highlighters:
-*coderay*, *syntax* and *ultraviolet*. 
+and the *coderay* Ruby scanner will be used to highlight the second line.
 
+The code below implements three most popular Ruby code highlighters
+of today: *coderay*, *syntax* and *ultraviolet*. 
 
 Code
 
