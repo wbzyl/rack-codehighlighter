@@ -79,6 +79,7 @@ module Rack
     end
 
     def syntax(string)
+      # allow use html instead of xml
       translate = {
         'html' => 'xml',
         'c' => 'ansic',
@@ -107,7 +108,8 @@ module Rack
         "<pre class='CodeRay'>#{string}</pre>"
       end
     end
-    
+
+    # Javascript highlighter
     def prettify(string)
       # prettify uses short names; I want to use full names
       translate = {
@@ -137,7 +139,6 @@ module Rack
         str = unescape_html(string.sub(@opts[:pattern], ""))
         "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}"
       else
-        # instead of pre the original/matched tag should be used        
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
     end
