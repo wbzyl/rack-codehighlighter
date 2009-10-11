@@ -7,8 +7,6 @@ module Rack
 
     # for logging use
     FORMAT = %{%s - [%s] [%s] "%s %s%s %s" (%s) %d %d %0.4f\n}
-    # example:
-    # sinatra.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n    
     
     def initialize(app, highlighter = :censor, opts = {})
       @app = app
@@ -58,6 +56,7 @@ module Rack
     private
 
     def log(env, status, headers, began_at)
+      # 127.0.0.1 - [ultraviolet] [10/Oct/2009 12:12:12] "GET /pastie HTTP/1.1" (text/html) 200 512 1.23
       now = Time.now
       logger = env['rack.errors']
       logger.write FORMAT % [
