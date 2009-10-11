@@ -4,8 +4,11 @@ require 'hpricot'
 module Rack
   class Codehighlighter
     include Rack::Utils
-    
+
+    # for logging use
     FORMAT = %{%s - [%s] [%s] "%s %s%s %s" (%s) %d %d %0.4f\n}
+    # example:
+    # sinatra.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n    
     
     def initialize(app, highlighter = :censor, opts = {})
       @app = app
@@ -13,7 +16,7 @@ module Rack
       @opts = {
         :element => "pre",
         :pattern => /\A:::(\w+)\s*\n/,
-        :reason => "[[--  ugly code removed  --]]",
+        :reason => "[[--  ugly code removed  --]]", #8-)
         :markdown => false  
       }
       @opts.merge! opts
@@ -55,7 +58,6 @@ module Rack
     private
 
     def log(env, status, headers, began_at)
-      # lilith.local [coderay] text/html [26/may/2009 12:00:00] "GET / HTTP/1.1" 200 ? ?\n
       now = Time.now
       logger = env['rack.errors']
       logger.write FORMAT % [
@@ -98,7 +100,6 @@ module Rack
     def coderay(string)
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
-      # instead of pre the original/matched tag should be used
       if refs
         lang = refs[1]
         str = unescape_html(string.sub(@opts[:pattern], ""))
@@ -109,6 +110,7 @@ module Rack
     end
     
     def prettify(string)
+      # prettify uses short names; I want to use full names
       translate = {
         'ruby' => 'rb',
         'bash' => 'bsh',
@@ -117,7 +119,6 @@ module Rack
       }
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
-      # instead of pre the original/matched tag should be used      
       if refs 
         lang = refs[1]
         str = string.sub(@opts[:pattern], "")
