@@ -73,7 +73,8 @@ module Rack
         now - began_at
       ]
     end
-    
+
+    # simplifies testing
     def censor(string)
       "<pre class='censor'>#{@opts[:reason]}</pre>"
     end
