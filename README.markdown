@@ -35,7 +35,7 @@ stylesheets in the *examples/public/stylesheets* directory.
 ### Rails
 
 In order to use, include the following code in a Rails application
-`config/environment.rb` file:
+*config/environment.rb* file:
 
     require 'coderay'               # get one of supported highlighters 
     require 'rack/codehighlighter'
