@@ -1,8 +1,5 @@
 # Rack::Codehighlighter middleware
 
-
-## What?
-
 The *Rack::Codehighlighter* is a middleware which allows for easy
 connecting a code highlighter of somebody's choice to an HTML page
 containing pieces of programming code. Parameters to
