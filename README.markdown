@@ -68,7 +68,7 @@ highlighter use the following:
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
 
 The first parenthesized expression from the pattern `/\A:::(\w+)\s*\n/`
-will be used to match the language name. For example, from the pre
+will be used to match the language name. For example, from the *pre*
 element below:
 
     <pre>:::ruby
@@ -84,7 +84,7 @@ Next, the matched element is removed and the second line is passed to
 *coderay* highlighter for processing.
 
 The highlighted code returned by the *coderay* highlighter is
-wrapped with `pre` element with attributes appropriate for the
+wrapped with *pre* element with attributes appropriate for the
 codehighlighter used.
 
 
@@ -124,7 +124,7 @@ Check the `examples` directory for working examples.
 
 ## Try it!
 
-Simple Copy & Paste example. Implemented in Sinatra and uses inline template.
+A simple Copy & Paste example.
 
     # example.rb
 
