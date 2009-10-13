@@ -110,7 +110,7 @@ module Rack
       end
     end
 
-    # Javascript highlighter
+    # experimental Javascript highlighter
     def prettify(string)
       # prettify uses short names; I want to use full names
       translate = {
