@@ -28,6 +28,10 @@ Install the gem with:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
+In order for the highlighting to show up, you’ll need to include a
+highlighting stylesheet. For example stylesheets you can look at
+stylesheets in the *examples/public/stylesheets* directory.
+
 ### Rails
 
 In order to use, include the following code in a Rails application
