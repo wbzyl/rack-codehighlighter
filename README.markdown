@@ -183,15 +183,6 @@ Languages supported by *Coderay*:
 * Ruby
 * YAML
 
-### [Google Code Prettify](http://code.google.com/p/google-code-prettify/), pure Javascript
-
-Languages supported by *Prettify*:
-
-* css, lisp, hs, lua, sql, vb, wiki,
-* bsh, c, cc, cpp, cs, csh, cyc, cv, htm, html,
-* java, js, m, mxml, perl, pl, pm, py, rb, sh,
-* xhtml, xml, xsl
-
 ### [Ultraviolet](http://ultraviolet.rubyforge.org/)
 
 The *ultraviolet* gem needs oniguruma regexp library.
