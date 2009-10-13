@@ -28,7 +28,7 @@ Install the gem with:
 
     sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
 
-### Using *rack-codehighlighter* with a Rails application
+### Rails
 
 In order to use, include the following code in a Rails application
 `config/environment.rb` file:
@@ -43,7 +43,7 @@ In order to use, include the following code in a Rails application
       config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     end  
 
-### Using *rack-codehighlighter* with a Rack application
+### Any Rack application
 
 The *rack-codehighlighter* gem can be used with any Rack application,
 for example with a **Sinatra** application. If your application
