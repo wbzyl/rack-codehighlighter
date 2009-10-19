@@ -26,7 +26,7 @@ highlighter.
 
 Install the gem with:
 
-    sudo gem install wbzyl-rack-codehighlighter -s http://gems.github.com
+    sudo gem install rack-codehighlighter -s http://gemcutter.org
 
 In order for the highlighting to show up, you’ll need to include a
 highlighting stylesheet. For example stylesheets you can look at
@@ -42,7 +42,7 @@ In order to use, include the following code in a Rails application
     
     Rails::Initializer.run do |config|  
       config.gem 'coderay'
-      config.gem 'wbzyl-rack-codehighlighter'
+      config.gem 'rack-codehighlighter'
         
       config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     end  
@@ -57,7 +57,7 @@ application pipeline, simply require and use as follows:
     gem 'coderay'       # get one of supported highlighters 
     require 'coderay'   
            
-    gem 'wbzyl-rack-codehighlighter'
+    gem 'rack-codehighlighter'
     require 'rack/codehighlighter'
      
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
@@ -135,7 +135,7 @@ A simple Copy & Paste example.
     require 'rubygems'
     gem 'sinatra'
     require 'sinatra'
-    gem 'wbzyl-rack-codehighlighter'
+    gem 'rack-codehighlighter'
     require 'rack/codehighlighter'
     
     use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
