@@ -13,7 +13,7 @@ module Rack
       @highlighter = highlighter
       @opts = {
         :element => "pre",
-        :pattern => /\A:::(\w+)\s*\n/,
+        :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
         :reason => "[[--  ugly code removed  --]]", #8-)
         :markdown => false  
       }
@@ -145,7 +145,7 @@ module Rack
     end
     
     def unescape_html(string)
-      string.to_s.gsub("&lt;", '<').gsub("&gt;", '>').gsub("&amp;", '&')
+      string.to_s.gsub(/&#x000A;/i, "\n").gsub("&lt;", '<').gsub("&gt;", '>').gsub("&amp;", '&')
     end
     
   end
