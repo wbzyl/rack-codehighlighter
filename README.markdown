@@ -99,29 +99,36 @@ In examples displayed below, the default value of each option is used.
 Coderay:
 
     use Rack::Codehighlighter, :coderay,
-      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+      :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 Ultraviolet:
 
     use Rack::Codehighlighter, :ultraviolet, :theme => "dawn", :lines => false,
-      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+      :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 Syntax:
 
     use Rack::Codehighlighter, :syntax,
-      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+      :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 Censor:
 
     use Rack::Codehighlighter, :censor, :reason => "[[--  ugly code removed  --]]",
-      :element => "pre", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+      :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 
 Markdown, Maruku and RDiscount processors, the code is wrapped with `pre>code`.  
 To remove this extra one level of nesting the `:markdown` option should be used:
 
     use Rack::Codehighlighter, :coderay, :markdown => true,
-      :element => "pre>code", :pattern => /\A:::(\w+)\s*\n/, :logging => false
+      :element => "pre>code", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
+
+**Remark:** Within `pre` tag, HAML replaces each new line characters
+with the `&#x000A;` entity (line feed) so that it can ensure that it
+doesn't adversely affect indentation.
+This change confuses both rack-codehighlighter and the highlighters
+themselves (e.g. Ultraviolet and Coderay).  So, to support `pre` tags
+as rendered by HAML, `&#x000A;` was added to the default pattern.
 
 Check the `examples` directory for working examples.
 
