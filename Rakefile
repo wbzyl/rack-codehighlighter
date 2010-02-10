@@ -13,7 +13,7 @@ begin
     gemspec.files = %w[LICENSE TODO Rakefile VERSION.yml] + FileList['lib/**/*.rb', "examples/**/*"]
     
     gemspec.add_runtime_dependency 'rack', '>=1.0.0'
-    gemspec.add_runtime_dependency 'hpricot', '>=0.8.1'   
+    gemspec.add_runtime_dependency 'nokogiri', '>=1.4.1'
     
     gemspec.add_development_dependency 'rack-test', '>=0.3.0'
   end

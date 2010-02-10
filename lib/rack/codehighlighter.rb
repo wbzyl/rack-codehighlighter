@@ -1,5 +1,5 @@
 require 'rack/utils'
-require 'hpricot'
+require 'nokogiri'
 
 module Rack
   class Codehighlighter
@@ -32,7 +32,7 @@ module Rack
 
         content = ""
         response.each { |part| content += part }
-        doc = Hpricot(content)
+        doc = Nokogiri::HTML(content)
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
