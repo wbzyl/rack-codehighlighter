@@ -106,6 +106,11 @@ Ultraviolet:
     use Rack::Codehighlighter, :ultraviolet, :theme => "dawn", :lines => false,
       :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
+    use Rack::Codehighlighter, :ultraviolet, :markdown => true, 
+      :theme => "minimal_theme", :lines => false, :element => "pre>code", 
+      :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
+      :themes => {"vibrant_ink" => ["ruby"], "upstream_sunburst" => ["objective-c", "java"]}
+
 Syntax:
 
     use Rack::Codehighlighter, :syntax,

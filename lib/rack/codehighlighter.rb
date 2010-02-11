@@ -131,14 +131,16 @@ module Rack
     end
 
     def ultraviolet(string)
-      opts = { :theme => 'dawn', :lines => false }
+      opts = { :theme => 'dawn', :lines => false, :themes => {} }
       opts.merge! @opts
       lang = 'text'
       refs = @opts[:pattern].match(string)  # extract language name
       if refs
         lang = refs[1]
+        theme = opts[:themes].collect do |k,v| 
+          k if v.include? lang end.compact.first || opts[:theme]
         str = unescape_html(string.sub(@opts[:pattern], ""))
-        "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], opts[:theme])}"
+        "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], theme)}"
       else
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
