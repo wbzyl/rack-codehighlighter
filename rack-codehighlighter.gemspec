@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-codehighlighter}
-  s.version = "0.4.3"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
-  s.date = %q{2010-02-10}
+  s.date = %q{2010-02-12}
   s.description = %q{Rack Middleware for Code Highlighting.}
   s.email = %q{matwb@univ.gda.pl}
   s.extra_rdoc_files = [
