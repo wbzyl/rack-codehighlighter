@@ -130,6 +130,22 @@ module Rack
       end
     end
 
+    def pygments_api(string)
+      require 'net/http'
+      require 'uri'
+      lang = 'unknown'
+      refs = @opts[:pattern].match(string)  # extract language name
+      if refs
+        lang = refs[1]
+        str = unescape_html(string.sub(@opts[:pattern], ""))
+        req = Net::HTTP.post_form(URI.parse('http://pygments.appspot.com/'),
+                            {'lang' => lang, 'code' => str})
+        "#{req.body}"
+      else
+        "<pre>#{string}</pre>"
+      end
+    end
+
     def ultraviolet(string)
       opts = { :theme => 'dawn', :lines => false, :themes => {} }
       opts.merge! @opts

@@ -12,6 +12,10 @@ It supports the most popular Ruby code highlighters of today:
 * coderay
 * syntax
 
+As well as
+
+* [Unofficial Pygments API](http://pygments.appspot.com/)
+
 To ease testing it implements *censor* highlighter.
 
 
@@ -106,10 +110,17 @@ Ultraviolet:
     use Rack::Codehighlighter, :ultraviolet, :theme => "dawn", :lines => false,
       :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
+or
+
     use Rack::Codehighlighter, :ultraviolet, :markdown => true, 
       :theme => "minimal_theme", :lines => false, :element => "pre>code", 
       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
       :themes => {"vibrant_ink" => ["ruby"], "upstream_sunburst" => ["objective-c", "java"]}
+
+Unofficial Pygments API:
+
+    use Rack::Codehighlighter, :pygments_api, :element => "pre",
+       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
 
 Syntax:
 
