@@ -19,13 +19,6 @@ begin
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler not available."
-  puts "Install it with:"
-  puts "  sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+  puts "Jeweler not available. Install it with:"
+  puts "  sudo gem install jeweler"
 end
-
-#Rake::TestTask.new(:test) do |t|
-#  t.libs << 'lib' << 'test'
-#  t.pattern = 'test/**/*_test.rb'
-#  t.verbose = false
-#end
