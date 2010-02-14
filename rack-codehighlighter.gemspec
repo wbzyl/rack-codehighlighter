@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wlodek Bzyl"]
-  s.date = %q{2010-02-12}
+  s.date = %q{2010-02-14}
   s.description = %q{Rack Middleware for Code Highlighting.}
   s.email = %q{matwb@univ.gda.pl}
   s.extra_rdoc_files = [
@@ -59,8 +59,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Rack Middleware for Code Highlighting.}
   s.test_files = [
-    "examples/app.rb",
-     "examples/check.rb"
+    "examples/check.rb",
+     "examples/app.rb"
   ]
 
   if s.respond_to? :specification_version then
