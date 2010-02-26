@@ -11,19 +11,6 @@ void hello(void) {
 }
 </pre>
 
-<h3>html</h3>
-
-<pre>:::html
-<html>
-  <head>
-    <title>hello world</title>
-  </head>
-  <body>
-    <h1>hello world</h1>
-  </body>
-</html>
-</pre>
-
 <h3>ruby </h3>
 
 <pre>:::ruby
@@ -50,7 +37,7 @@ body {
 }
 </pre>
 
-<h3>sqlite</h3>
+<h3>sql</h3>
 
 <pre>:::sql
 drop table if exists exams;  
@@ -60,22 +47,4 @@ create table exams (
   result      integer       default 0 collate nocase,  
   when        datetime
 );  
-</pre>
-
-<h3>javascript</h3>
-
-<pre>:::javascript
-for (var i = 0, length = properties.length; i < length; i++) {
-  var property = properties[i], value = source[property];
-  if (ancestor && Object.isFunction(value) &&
-          value.argumentNames().first() == "$super") {
-    var method = value, value = Object.extend((function(m) {
-          return function() { return ancestor[m].apply(this, arguments) };
-        })(property).wrap(method), {
-          valueOf:  function() { return method },
-          toString: function() { return method.toString() }
-        });
-  }
-  this.prototype[property] = value;
-}
 </pre>
