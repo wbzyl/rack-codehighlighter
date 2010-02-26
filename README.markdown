@@ -30,7 +30,7 @@ highlighter.
 
 Install the gem with:
 
-    sudo gem install rack-codehighlighter -s http://gemcutter.org
+    sudo gem install rack-codehighlighter
 
 In order for the highlighting to show up, you’ll need to include a
 highlighting stylesheet. For example stylesheets you can look at
@@ -146,7 +146,13 @@ This change confuses both rack-codehighlighter and the highlighters
 themselves (e.g. Ultraviolet and Coderay).  So, to support `pre` tags
 as rendered by HAML, `&#x000A;` was added to the default pattern.
 
-Check the `examples` directory for working examples.
+The *examples* directory contains several rackup files.
+Each rackup file uses a different highlighter.
+Install the *shotgun* gem and try, for example, the Pygments highlighter:
+
+    shotgun pygments.ru 
+
+The results could be checked at *http://localhost:9393*.
 
 
 ## Try it!
