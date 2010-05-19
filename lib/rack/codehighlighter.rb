@@ -13,7 +13,7 @@ module Rack
       @highlighter = highlighter
       @opts = {
         :element => "pre",
-        :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
+        :pattern => /\A:::([-_\w]+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
         :reason => "[[--  ugly code removed  --]]", #8-)
         :markdown => false  
       }
