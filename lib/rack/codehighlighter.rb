@@ -13,7 +13,7 @@ module Rack
       @highlighter = highlighter
       @opts = {
         :element => "pre",
-        :pattern => /\A:::([-_\w]+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
+        :pattern => /\A:::([-_\w]+)(?:\s+([-.\/\d\w]+))?\s*(?:\n|&#x000A;)/i,  # &#x000A; == line feed
         :reason => "[[--  ugly code removed  --]]", #8-)
         :markdown => false  
       }
@@ -149,14 +149,19 @@ module Rack
     def ultraviolet(string)
       opts = { :theme => 'dawn', :lines => false, :themes => {} }
       opts.merge! @opts
-      lang = 'text'
+      lang = 'plain_text'
       refs = @opts[:pattern].match(string)  # extract language name
       if refs
         lang = refs[1]
         theme = opts[:themes].collect do |k,v| 
           k if v.include? lang end.compact.first || opts[:theme]
         str = unescape_html(string.sub(@opts[:pattern], ""))
-        "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], theme)}"
+        pretty = "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], theme)}"
+        if refs[2]
+          filename = refs[2]
+          pretty = "<div class='pre-caption'>#{filename}</div>\n" + pretty
+        end
+        pretty 
       else
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
