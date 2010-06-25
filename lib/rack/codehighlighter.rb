@@ -13,7 +13,7 @@ module Rack
       @highlighter = highlighter
       @opts = {
         :element => "pre",
-        :pattern => /\A:::([-_\w]+)(?:\s+([-.\/\d\w]+))?\s*(?:\n|&#x000A;)/i,  # &#x000A; == line feed
+        :pattern => /\A:::([-_\w]+)(?:\s+(~?[-.\/\d\w]+))?\s*(?:\n|&#x000A;)/i,  # &#x000A; == line feed
         :reason => "[[--  ugly code removed  --]]", #8-)
         :markdown => false  
       }
@@ -33,10 +33,10 @@ module Rack
         content = ""
         response.each { |part| content += part }
         #doc = Nokogiri::HTML(content)
-        doc = Nokogiri::HTML(content, nil, 'UTF-8')
-        #doc = Nokogiri::HTML(content, nil, 'UTF-8') do |config|
-        #  config.strict.noent
-        #end
+        #doc = Nokogiri::HTML(content, nil, 'UTF-8')
+        doc = Nokogiri::HTML(content) do |config|
+          config.strict.noent
+        end
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
