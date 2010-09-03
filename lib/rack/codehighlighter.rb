@@ -32,7 +32,7 @@ module Rack
 
         content = ""
         response.each { |part| content += part }
-        doc = Nokogiri::HTML(content)
+        doc = Nokogiri::HTML(content, nil, 'UTF-8')
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
