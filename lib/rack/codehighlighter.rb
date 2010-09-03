@@ -1,3 +1,4 @@
+# -*- coding: undecided -*-
 require 'rack/utils'
 require 'nokogiri'
 
@@ -33,10 +34,11 @@ module Rack
         content = ""
         response.each { |part| content += part }
         #doc = Nokogiri::HTML(content)
-        #doc = Nokogiri::HTML(content, nil, 'UTF-8')
-        doc = Nokogiri::HTML(content) do |config|
-          config.strict.noent
-        end
+        #doc.encoding = 'UTF-8'
+        #doc = Nokogiri::HTML(content) do |config|
+        #  config.strict.noent
+        #end
+        doc = Nokogiri::HTML(content, nil, 'UTF-8')
         nodes = doc.search(@opts[:element])
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
@@ -46,10 +48,8 @@ module Rack
             node.swap(send(@highlighter, s))            
           end
         end
-
         body = doc.to_html
         headers['content-length'] = bytesize(body).to_s
-
         log(env, status, headers, began_at) if @opts[:logging]
         [status, headers, [body]]
       else
