@@ -36,3 +36,13 @@ In each piece of code inserted into html we must change:
 
 Analyze packages mentioned at the *The Ruby Toolbox* page:
 [Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html)
+
+[5.12.2011]
+
+[Syntax Highlighting on the Web](http://achinghead.com/archive/88/syntax-highlighting-web/):
+
+Another problem is that each of those JavaScript libraries uses a slightly different syntax 
+to determine what code blocks are to be highlighted and what language to highlight them as. 
+In other words, a library like Markdown can't just output all its code blocks using one 
+format and expect it to work with any JavaScript syntax highlighting library. 
+And that's a problem.
