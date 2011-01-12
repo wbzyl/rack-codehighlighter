@@ -1,4 +1,5 @@
-# -*- coding: undecided -*-
+# -*- encoding: utf-8 -*-
+
 require 'rack/utils'
 require 'nokogiri'
 
