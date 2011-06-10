@@ -7,15 +7,15 @@ module Rack
 
     # for logging use
     FORMAT = %{%s - [%s] [%s] "%s %s%s %s" (%s) %d %d %0.4f\n}
-    
+
     def initialize(app, highlighter = :censor, opts = {})
       @app = app
       @highlighter = highlighter
       @opts = {
         :element => "pre",
-        :pattern => /\A:::([-_\w]+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
+        :pattern => /\A:::([-\w]+)\s*(\n|&#x000A;)/i,  # &#x000A; == line feed
         :reason => "[[--  ugly code removed  --]]", #8-)
-        :markdown => false  
+        :markdown => false
       }
       @opts.merge! opts
     end
@@ -37,9 +37,9 @@ module Rack
         nodes.each do |node|
           s = node.inner_html || "[++where is the code?++]"
           if @opts[:markdown]
-            node.parent.swap(send(@highlighter, s))  
+            node.parent.swap(send(@highlighter, s))
           else
-            node.swap(send(@highlighter, s))            
+            node.swap(send(@highlighter, s))
           end
         end
 
@@ -49,10 +49,10 @@ module Rack
         log(env, status, headers, began_at) if @opts[:logging]
         [status, headers, [body]]
       else
-        [status, headers, response]  
+        [status, headers, response]
       end
     end
-    
+
     private
 
     def log(env, status, headers, began_at)
@@ -92,12 +92,12 @@ module Rack
       if refs
         lang = refs[1]
         convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
-        convertor.convert(unescape_html(string.sub(@opts[:pattern], "")) || "[=this can'n happen=]")        
+        convertor.convert(unescape_html(string.sub(@opts[:pattern], "")) || "[=this can'n happen=]")
       else
         "<pre>#{string}</pre>"
       end
     end
-    
+
     def coderay(string)
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
@@ -121,7 +121,7 @@ module Rack
       }
       lang = 'unknown'
       refs = @opts[:pattern].match(string)  # extract language name
-      if refs 
+      if refs
         lang = refs[1]
         str = string.sub(@opts[:pattern], "")
         "<pre class='prettyprint lang-#{translate[lang] || lang}'>#{str}</pre>"
@@ -153,7 +153,7 @@ module Rack
       refs = @opts[:pattern].match(string)  # extract language name
       if refs
         lang = refs[1]
-        theme = opts[:themes].collect do |k,v| 
+        theme = opts[:themes].collect do |k,v|
           k if v.include? lang end.compact.first || opts[:theme]
         str = unescape_html(string.sub(@opts[:pattern], ""))
         "#{::Uv.parse(str, 'xhtml', lang, opts[:lines], theme)}"
@@ -161,10 +161,10 @@ module Rack
         "<pre class='#{opts[:theme]}'>#{string}</pre>"
       end
     end
-    
+
     def unescape_html(string)
       string.to_s.gsub(/&#x000A;/i, "\n").gsub("&lt;", '<').gsub("&gt;", '>').gsub("&amp;", '&')
     end
-    
+
   end
 end
