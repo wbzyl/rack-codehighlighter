@@ -129,7 +129,12 @@ module Rack
       if refs
         lang = refs[1]
         str = string.sub(@opts[:pattern], "")
-        "<pre class='prettyprint lang-#{translate[lang] || lang}'>#{str}</pre>"
+        pretty = "<pre class='prettyprint lang-#{translate[lang] || lang}'>#{str}</pre>"
+        if refs[2]
+          filename = refs[2]
+          pretty = "<div class='pre-caption'>#{filename}</div>\n" + pretty
+        end
+        pretty
       else
         "<pre>#{string}</pre>"
       end
