@@ -109,7 +109,12 @@ module Rack
       if refs
         lang = refs[1]
         str = unescape_html(string.sub(@opts[:pattern], ""))
-        "<pre class='CodeRay'>#{::CodeRay.encoder(:html).encode str, lang}</pre>"
+        pretty = "<pre class='CodeRay'>#{::CodeRay.encoder(:html).encode str, lang}</pre>"
+        if refs[2]
+          filename = refs[2]
+          pretty = "<div class='pre-caption'>#{filename}</div>\n" + pretty
+        end
+        pretty
       else
         "<pre class='CodeRay'>#{string}</pre>"
       end
