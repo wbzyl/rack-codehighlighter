@@ -91,7 +91,7 @@ module Rack
       refs = @opts[:pattern].match(string)  # extract language name
       if refs
         lang = refs[1]
-        convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
+        convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang] || lang
         convertor.convert(unescape_html(string.sub(@opts[:pattern], "")) || "[=this can'n happen=]")
       else
         "<pre>#{string}</pre>"
