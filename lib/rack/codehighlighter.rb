@@ -135,7 +135,8 @@ module Rack
       if refs
         lang = refs[1]
         str = unescape_html(string.sub(@opts[:pattern], ""))
-        Pygments.highlight(str, :lexer => lang, :formatter => 'html')
+        #Pygments.highlight(str, :lexer => lang, :formatter => 'html')
+        Rygments.highlight_string(str, lang, 'html')
       else
         "<pre>#{string}</pre>"
       end

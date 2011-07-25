@@ -3,7 +3,8 @@ require 'rubygems'
 require 'coderay'
 require 'uv'
 require 'syntax/convertors/html'
-require 'pygments'
+require 'rygments'
+#require 'pygments'
 
 str = "def hitch; end"
 
@@ -16,5 +17,8 @@ puts CodeRay.encoder(:html).encode(str, 'ruby')
 puts "---- Ultraviolet ----"
 puts Uv.parse(str, 'xhtml', 'ruby_experimental', false, 'dawn')
 
-puts "---- Pygments ----"
-puts Pygments.highlight(str, :lexer => 'ruby', :formatter => 'html')
+puts "---- Rygments ----"
+puts Rygments.highlight_string(str, 'ruby', 'html')
+
+#puts "---- Pygments ----"
+#puts Pygments.highlight(str, :lexer => 'ruby', :formatter => 'html')

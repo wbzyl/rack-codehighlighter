@@ -11,7 +11,7 @@ It supports the most popular Ruby code highlighters of today:
 * ultraviolet
 * coderay
 * syntax
-* pygments (through pygments.rb)
+* pygments (through [rygments](https://github.com/thedjinn/rygments))
 
 As well as
 
@@ -31,13 +31,13 @@ highlighter.
 
 Install the gem with:
 
-    sudo gem install rack-codehighlighter
+    gem install rack-codehighlighter
 
 In order for the highlighting to show up, you’ll need to include a
 highlighting stylesheet. For example stylesheets you can look at
 stylesheets in the *examples/public/stylesheets* directory.
 
-### Rails
+### Rails 2
 
 In order to use, include the following code in a Rails application
 *config/environment.rb* file:
@@ -52,6 +52,22 @@ In order to use, include the following code in a Rails application
       config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     end
 
+### Rails 3
+
+In order to use, update *Gemfile* with:
+
+    gem 'coderay'
+    gem 'rack-codehighlighter', :require => 'rack/codehighlighter'
+
+Next, add *Rack::Codehighlighter* to the application middleware stack,
+updating *config/environments/development.rb* and
+*config/environments/production.rb* with:
+
+    config.middleware.use Rack::Codehighlighter, :coderay,
+      :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
+
+(see [Rails on Rack](http://guides.rubyonrails.org/rails_on_rack.html)).
+
 ### Any Rack application
 
 The *rack-codehighlighter* gem can be used with any Rack application,
@@ -59,10 +75,7 @@ for example with a **Sinatra** application. If your application
 includes a rackup file or uses *Rack::Builder* to construct the
 application pipeline, simply require and use as follows:
 
-    gem 'coderay'       # get one of supported highlighters
-    require 'coderay'
-
-    gem 'rack-codehighlighter'
+    require 'coderay'  # get one of supported highlighters
     require 'rack/codehighlighter'
 
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
@@ -118,12 +131,12 @@ or
       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
       :themes => {"vibrant_ink" => ["ruby"], "upstream_sunburst" => ["objective-c", "java"]}
 
-Unofficial Pygments API (uses web service no dependencies):
+Unofficial Pygments API (uses web service, no dependencies):
 
     use Rack::Codehighlighter, :pygments_api, :element => "pre",
        :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
 
-Pygments (with pygments.rb):
+Rygments (with the *rygments* gem):
 
     use Rack::Codehighlighter, :pygments, :element => "pre",
        :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
@@ -154,11 +167,11 @@ as rendered by HAML, `&#x000A;` was added to the default pattern.
 
 The *examples* directory contains several rackup files.
 Each rackup file uses a different highlighter.
-Install the *shotgun* gem and try, for example, the Pygments highlighter:
+Try, for example, the Pygments highlighter:
 
-    shotgun pygments.ru
+    rackup coderay.ru
 
-The results could be checked at *http://localhost:9393*.
+The results could be checked at *http://localhost:9292*.
 
 
 ## Try it!
@@ -168,9 +181,7 @@ A simple Copy & Paste example.
     # example.rb
 
     require 'rubygems'
-    gem 'sinatra'
     require 'sinatra'
-    gem 'rack-codehighlighter'
     require 'rack/codehighlighter'
 
     use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
@@ -196,13 +207,14 @@ Run the example with:
 
     ruby example.rb
 
-and check results at *http://localhost:4567*.
+and check the results at *http://localhost:4567*.
 
 
 ## Supported highlighters
 
 These currently include: *Syntax* (fast), *Coderay* (very fast),
-*Ultraviolet* (slow, but highlights almost any language).
+*Ultraviolet* (slow, but highlights almost any language),
+Pygments (via the *rygments* gem or unofficial api).
 
 ### [Syntax](http://syntax.rubyforge.org/)
 
