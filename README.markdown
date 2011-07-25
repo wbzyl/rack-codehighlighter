@@ -117,9 +117,14 @@ or
       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
       :themes => {"vibrant_ink" => ["ruby"], "upstream_sunburst" => ["objective-c", "java"]}
 
-Unofficial Pygments API:
+Unofficial Pygments API (uses web service no dependencies):
 
     use Rack::Codehighlighter, :pygments_api, :element => "pre",
+       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
+
+Pygments (with rygments):
+
+    use Rack::Codehighlighter, :pygments, :element => "pre",
        :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
 
 Syntax:

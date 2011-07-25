@@ -130,6 +130,17 @@ module Rack
       end
     end
 
+    def pygments(string)
+      refs = @opts[:pattern].match(string)
+      if refs
+        lang = refs[1]
+        str = unescape_html(string.sub(@opts[:pattern], ""))
+        Rygments.highlight_string(str, lang, 'html')
+      else
+        "<pre>#{string}</pre>"
+      end
+    end
+
     def pygments_api(string)
       require 'net/http'
       require 'uri'
