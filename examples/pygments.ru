@@ -4,7 +4,7 @@ require 'app'
 use Rack::ShowExceptions
 use Rack::Lint
 
-require 'rygments'
+require 'pygments'
 use Rack::Codehighlighter, :pygments, :element => "pre", :pattern => /\A:::([-_+\w]+)\s*\n/, :logging => true
 
 run Sinatra::Application
