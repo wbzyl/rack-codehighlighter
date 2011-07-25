@@ -6,10 +6,6 @@ require 'sinatra'
 
 require 'rack/codehighlighter'
 
-require 'coderay'                # Coderay
-require 'syntax/convertors/html' # Syntax
-require 'uv'                     # Ultraviolet
-
 get "/" do
   erb :index
 end

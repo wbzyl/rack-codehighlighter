@@ -91,7 +91,7 @@ module Rack
       refs = @opts[:pattern].match(string)  # extract language name
       if refs
         lang = refs[1]
-        convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang]
+        convertor = ::Syntax::Convertors::HTML.for_syntax translate[lang] || lang
         convertor.convert(unescape_html(string.sub(@opts[:pattern], "")) || "[=this can'n happen=]")
       else
         "<pre>#{string}</pre>"
@@ -125,6 +125,17 @@ module Rack
         lang = refs[1]
         str = string.sub(@opts[:pattern], "")
         "<pre class='prettyprint lang-#{translate[lang] || lang}'>#{str}</pre>"
+      else
+        "<pre>#{string}</pre>"
+      end
+    end
+
+    def pygments(string)
+      refs = @opts[:pattern].match(string)
+      if refs
+        lang = refs[1]
+        str = unescape_html(string.sub(@opts[:pattern], ""))
+        Pygments.highlight(str, :lexer => lang, :formatter => 'html')
       else
         "<pre>#{string}</pre>"
       end
