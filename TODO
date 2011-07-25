@@ -1,9 +1,4 @@
-[15.06.2009]
-
-  Compare: http://freelancing-god.github.com/ts/en/
-  Description of thinking-sphinx gem.
-
-[13.10.2009]
+[22.07.2011]
 
 Currently, almost everything what I write is rendered by Ruby on Rails
 and Sinatra applications. To improve the readability of the text, I
@@ -14,7 +9,7 @@ The problem is to how syntax highlighting features are hooked into
 these frameworks.
 
 Look at the current practice. To this end, analyze the top three tools
-listed on *The Ruby Toolbox* in category 
+listed on *The Ruby Toolbox* in category
 [Syntax Highlighting](http://ruby-toolbox.com/categories/syntax_highlighting.html).
 
 [tm_syntax_highlighting](http://github.com/arya/tm_syntax_highlighting/) (plugin):
@@ -29,7 +24,7 @@ listed on *The Ruby Toolbox* in category
 
 [Redcloth with CodeRay](http://github.com/augustl/redcloth-with-coderay) (gem):
 
-    <source:ruby> some_ruby_code </source> 
+    <source:ruby> some_ruby_code </source>
 
 In each piece of code inserted into html we must change:
 `<` to `&lt;`. This is annoying thing.

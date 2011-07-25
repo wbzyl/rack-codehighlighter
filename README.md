@@ -42,15 +42,15 @@ stylesheets in the *examples/public/stylesheets* directory.
 In order to use, include the following code in a Rails application
 *config/environment.rb* file:
 
-    require 'coderay'               # get one of supported highlighters 
+    require 'coderay'               # get one of supported highlighters
     require 'rack/codehighlighter'
-    
-    Rails::Initializer.run do |config|  
+
+    Rails::Initializer.run do |config|
       config.gem 'coderay'
       config.gem 'rack-codehighlighter'
-        
+
       config.middleware.use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
-    end  
+    end
 
 ### Any Rack application
 
@@ -59,12 +59,12 @@ for example with a **Sinatra** application. If your application
 includes a rackup file or uses *Rack::Builder* to construct the
 application pipeline, simply require and use as follows:
 
-    gem 'coderay'       # get one of supported highlighters 
-    require 'coderay'   
-           
+    gem 'coderay'       # get one of supported highlighters
+    require 'coderay'
+
     gem 'rack-codehighlighter'
     require 'rack/codehighlighter'
-     
+
     use Rack::Codehighlighter, :coderay, :element => "pre", :pattern => /\A:::(\w+)\s*\n/
     run app
 
@@ -84,7 +84,7 @@ element below:
     puts "hello world"
     </pre>
 
-the *ruby* name is extracted. 
+the *ruby* name is extracted.
 
 To find the appropriate name to use for programming language,
 look at the lists below.
@@ -113,8 +113,8 @@ Ultraviolet:
 
 or
 
-    use Rack::Codehighlighter, :ultraviolet, :markdown => true, 
-      :theme => "minimal_theme", :lines => false, :element => "pre>code", 
+    use Rack::Codehighlighter, :ultraviolet, :markdown => true,
+      :theme => "minimal_theme", :lines => false, :element => "pre>code",
       :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
       :themes => {"vibrant_ink" => ["ruby"], "upstream_sunburst" => ["objective-c", "java"]}
 
@@ -139,7 +139,7 @@ Censor:
       :element => "pre", :pattern => /\A:::(\w+)\s*(\n|&#x000A;)/i, :logging => false
 
 
-Markdown, Maruku and RDiscount processors, the code is wrapped with `pre>code`.  
+Markdown, Maruku and RDiscount processors, the code is wrapped with `pre>code`.
 To remove this extra one level of nesting the `:markdown` option should be used:
 
     use Rack::Codehighlighter, :coderay, :markdown => true,
@@ -156,7 +156,7 @@ The *examples* directory contains several rackup files.
 Each rackup file uses a different highlighter.
 Install the *shotgun* gem and try, for example, the Pygments highlighter:
 
-    shotgun pygments.ru 
+    shotgun pygments.ru
 
 The results could be checked at *http://localhost:9393*.
 
@@ -172,13 +172,13 @@ A simple Copy & Paste example.
     require 'sinatra'
     gem 'rack-codehighlighter'
     require 'rack/codehighlighter'
-    
+
     use Rack::Codehighlighter, :censor, :reason => '[[--difficult code removed--]]'
-    
+
     get "/" do
       erb :hello
     end
-    
+
     __END__
     @@ hello
     <h3>Fibonacci numbers in Ruby</h3>
@@ -201,28 +201,32 @@ and check results at *http://localhost:4567*.
 
 ## Supported highlighters
 
-These currently include: *Syntax* (fast), *Coderay* (very fast), 
+These currently include: *Syntax* (fast), *Coderay* (very fast),
 *Ultraviolet* (slow, but highlights almost any language).
 
 ### [Syntax](http://syntax.rubyforge.org/)
 
-Languages supported by *Syntax*: 
+Languages supported by *Syntax*:
 
 * xml
 * ruby
 
 ### [Coderay](http://coderay.rubychan.de/)
 
-Languages supported by *Coderay*:
+Languages supported by
+the [coderay](https://github.com/rubychan/coderay) library:
 
-* C, CSS
+* C, C++, CSS
 * Delphi, diff
-* HTML, RHTML (Rails), Nitro-XHTML
+* ERB+HTML, Groovy (beta), HTML
 * Java, JavaScript, JSON
-* Ruby
-* YAML
+* Nitro-XHTML, PHP, Python
+* Ruby, Scheme (beta), SQL
+* XML, YAML
 
-### [Ultraviolet](http://ultraviolet.rubyforge.org/)
+
+
+### [Ultraviolet](http://ultraviolet.rubyforge.org/) and 1.8 tree of the Ruby programming language
 
 The *ultraviolet* gem needs oniguruma regexp library.
 
@@ -236,6 +240,12 @@ see [Carbonica](http://carboni.ca/projects/harsh/)
 Now, install the gem:
 
     sudo gem install ultraviolet
+
+### [Ultraviolet](http://ultraviolet.rubyforge.org/) and 1.9 tree of the Ruby programming language
+
+Install a fixed version of the Ultraviolet syntax highlighting
+library for the 1.9 tree of the Ruby programming language from
+[here](https://github.com/spox/ultraviolet).
 
 See also [Ultraviolet themes gallery](http://ultraviolet.rubyforge.org/themes.xhtml)
 
@@ -253,7 +263,7 @@ Ultraviolet supports almost any language:
 * haml, haskell, html, html-asp, html\_django, html\_for\_asp.net, html\_mason,
   html\_rails, html\_tcl
 * icalendar, inform, ini, installer\_distribution\_script, io
-* java, javaproperties, javascript, javascript\_+\_prototype, 
+* java, javaproperties, javascript, javascript\_+\_prototype,
   javascript\_+\_prototype\_bracketed, jquery\_javascript, json
 * languagedefinition, latex, latex\_beamer, latex\_log, latex\_memoir, lexflex,
   lighttpd, lilypond, lisp, literate\_haskell, logo, logtalk, lua

@@ -1,5 +1,3 @@
-\#*
-.\#*
-*~
-*.bak
-*.gem
+pkg/*
+Gemfile.lock
+.bundle
