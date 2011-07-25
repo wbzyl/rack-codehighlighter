@@ -11,6 +11,7 @@ It supports the most popular Ruby code highlighters of today:
 * ultraviolet
 * coderay
 * syntax
+* pygments (through Rygments)
 
 As well as
 
