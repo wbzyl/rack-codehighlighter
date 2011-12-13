@@ -138,8 +138,16 @@ Unofficial Pygments API (uses web service, no dependencies):
 
 Rygments (with the *rygments* gem):
 
-    use Rack::Codehighlighter, :pygments, :element => "pre",
+    use Rack::Codehighlighter, :rygments, :element => "pre",
        :pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false
+       
+Pygments (with the *pygments.rb* gem):
+
+    use Rack::Codehighlighter, :pygments, :element => "pre>code",
+        pattern => /\A:::([-_+\w]+)\s*(\n|&#x000A;)/, :logging => false,
+        options => { :linenos => 'inline' }
+        
+(the `options` hash can accept standard [Pygments configuration options](http://pygments.org/docs/formatters/)).
 
 Syntax:
 
