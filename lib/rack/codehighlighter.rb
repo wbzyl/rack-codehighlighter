@@ -44,7 +44,8 @@ module Rack
         end
 
         body = doc.to_html
-        headers['content-length'] = bytesize(body).to_s
+
+        headers['Content-Length'] = bytesize(body).to_s
 
         log(env, status, headers, began_at) if @opts[:logging]
         [status, headers, [body]]
